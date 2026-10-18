@@ -12,6 +12,14 @@ export const sections = [
   { folder: '06_OBCHOD', label: 'Obchod', number: '06', summary: 'Premena ponuky na zákazky a tržby.' },
 ];
 
+const visibleDocumentsBySection = new Map([
+  ['02_BRAND', new Set([
+    '02_BRAND/BRAND_AUDIT.md',
+    '02_BRAND/Design System/README.md',
+    '02_BRAND/TODO.md',
+  ])],
+]);
+
 const allowedTags = [
   ...sanitizeHtml.defaults.allowedTags,
   'details', 'summary', 'figure', 'figcaption', 'mark', 's', 'input',
@@ -73,10 +81,13 @@ export async function loadContentIndex(root) {
   const allFiles = await walk(root);
   const documents = [];
   for (const relativePath of allFiles.filter((file) => file.toLowerCase().endsWith('.md'))) {
+    const section = relativePath.includes('/') ? relativePath.split('/')[0] : 'ROADMAP';
+    const visibleDocuments = visibleDocumentsBySection.get(section);
+    if (visibleDocuments && !visibleDocuments.has(relativePath)) continue;
     const source = await fs.readFile(safeContentPath(root, relativePath), 'utf8');
     documents.push({
       path: relativePath,
-      section: relativePath.includes('/') ? relativePath.split('/')[0] : 'ROADMAP',
+      section,
       title: titleFromMarkdown(source, path.basename(relativePath, '.md').replaceAll('_', ' ')),
     });
   }

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
+import path from 'node:path';
 import test from 'node:test';
-import { renderMarkdown, renderRoadmapHtml, safeContentPath } from '../src/content.js';
+import { loadContentIndex, renderMarkdown, renderRoadmapHtml, safeContentPath } from '../src/content.js';
 
 test('markdown links stay inside the authenticated content routes', () => {
   const html = renderMarkdown(
@@ -27,4 +28,18 @@ test('the original roadmap HTML keeps its design and routes its assets and docum
 test('content paths reject traversal', () => {
   assert.throws(() => safeContentPath('/tmp/content', '../secret.md'));
   assert.equal(safeContentPath('/tmp/content', '02_BRAND/README.md'), '/tmp/content/02_BRAND/README.md');
+});
+
+test('Brand navigation exposes only the approved three entries', async () => {
+  const index = await loadContentIndex(path.resolve('content'));
+  const brandPaths = index.documents
+    .filter((document) => document.section === '02_BRAND')
+    .map((document) => document.path);
+
+  assert.deepEqual(brandPaths, [
+    '02_BRAND/BRAND_AUDIT.md',
+    '02_BRAND/Design System/README.md',
+    '02_BRAND/TODO.md',
+  ]);
+  assert.equal(index.allFiles.has('02_BRAND/DECISIONS.md'), true);
 });
