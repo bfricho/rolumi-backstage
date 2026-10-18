@@ -1,0 +1,16 @@
+{
+  "sourceRoot": "..",
+  "include": [
+    "ROADMAP.md",
+    "ROADMAP.html",
+    "01_HISTORIA",
+    "02_BRAND",
+    "03_STRATEGIA_A_POSITIONING",
+    "04_WEB",
+    "05_MARKETING",
+    "06_OBCHOD"
+  ],
+  "exclude": [
+    "02_BRAND/Proposals"
+  ]
+}

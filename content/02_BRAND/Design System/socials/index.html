@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ROLUMI Design System — Sociálne siete</title>
+  <link rel="icon" href="data:,">
+  <style>
+    @font-face {
+      font-family: Inter;
+      src: url("../fonts/InterVariable.woff2") format("woff2-variations");
+      font-weight: 100 900;
+      font-display: swap;
+    }
+
+    :root {
+      --ink: #1d1e1f;
+      --yellow: #f9b62b;
+      --white: #ffffff;
+      --muted: #606367;
+      --line: #dfe1e2;
+      --surface: #eceeef;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: var(--surface); color: var(--ink); font-family: Inter, Arial, sans-serif; }
+    img { display: block; max-width: 100%; }
+    button { font: inherit; }
+    .shell { width: min(calc(100% - 40px), 1420px); margin-inline: auto; }
+
+    .page-header { padding: 40px 0 72px; background: var(--ink); color: white; }
+    .brand-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand-row img { width: 190px; }
+    .header-meta { display: flex; align-items: center; gap: 24px; }
+    .back { color: white; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+    .back:hover { color: var(--yellow); }
+    .status { color: #c7c9cb; font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .page-header h1 { max-width: 900px; margin: 80px 0 18px; font-size: clamp(48px, 8vw, 112px); line-height: .92; letter-spacing: -.06em; }
+    .page-header h1 span { color: var(--yellow); }
+    .page-header p { max-width: 680px; margin: 0; color: #c7c9cb; font-size: 20px; line-height: 1.5; }
+
+    .toolbar { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.94); backdrop-filter: blur(14px); }
+    .toolbar-inner { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .toolbar strong { font-size: 14px; letter-spacing: .08em; text-transform: uppercase; }
+    .toggle { padding: 10px 16px; border: 2px solid var(--ink); background: transparent; color: var(--ink); font-weight: 800; cursor: pointer; }
+    .toggle[aria-pressed="true"] { border-color: var(--yellow); background: var(--yellow); }
+
+    .section { padding: 88px 0; }
+    .section--white { background: white; }
+    .section-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 480px); gap: 48px; align-items: end; margin-bottom: 44px; }
+    .eyebrow { margin: 0 0 16px; color: var(--yellow); font-size: 13px; font-weight: 850; letter-spacing: .18em; text-transform: uppercase; }
+    .section h2 { max-width: 820px; margin: 0; font-size: clamp(38px, 5vw, 72px); line-height: 1; letter-spacing: -.045em; }
+    .section-intro { margin: 0; color: var(--muted); font-size: 18px; line-height: 1.55; }
+
+    .format-grid { display: grid; gap: 36px; align-items: start; }
+    .format-grid--feed { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .format-grid--vertical { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .format-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; color: var(--muted); font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .format-meta span:last-child { font-weight: 600; letter-spacing: 0; }
+    .preview { padding: 12px; border: 1px solid var(--line); background: #f8f8f7; }
+    .artboard { position: relative; isolation: isolate; overflow: hidden; container-type: inline-size; background: var(--ink); }
+    .artboard--feed { aspect-ratio: 4 / 5; }
+    .artboard--vertical { aspect-ratio: 9 / 16; }
+    .artboard > .photo { position: absolute; width: 100%; height: 100%; object-fit: cover; }
+    .artboard .brand-mark { --mark-width: 7.5cqw; --mark-clear: var(--mark-width); position: absolute; z-index: 4; top: 0; left: 0; width: calc(var(--mark-width) + 2 * var(--mark-clear)); padding: var(--mark-clear); }
+    .artboard .brand-mark img { position: relative; z-index: 2; width: 100%; height: auto; }
+    .artboard .brand-mark::after { content: "Ochranná zóna znaku"; position: absolute; z-index: 1; inset: 0; display: none; place-items: end center; padding: 2cqw; border: 2px dashed currentColor; background: rgba(249,182,43,.18); color: currentColor; font-size: 2.4cqw; font-weight: 850; line-height: 1.05; letter-spacing: .06em; text-align: center; text-transform: uppercase; }
+    .artboard--vertical .brand-mark { --mark-width: 10cqw; top: 10%; }
+    body.show-safe .brand-mark::after { display: grid; }
+    .artboard .headline { position: relative; z-index: 4; margin: 0; font-size: 10cqw; font-weight: 900; line-height: .94; letter-spacing: -.055em; }
+    .artboard .micro { position: relative; z-index: 4; margin: 0; font-size: 3.5cqw; font-weight: 800; line-height: 1.1; }
+    .artboard .accent { position: relative; z-index: 4; width: 28%; height: 1.2cqw; background: var(--yellow); }
+
+    .post-service { background: var(--yellow); color: var(--ink); }
+    .post-service .photo { height: 67.5%; object-position: 56% center; }
+    .post-service .content { position: absolute; z-index: 3; left: 7%; right: 7%; bottom: 7%; }
+    .post-service .headline { font-size: 11cqw; }
+    .post-service .micro { margin-top: 4%; }
+
+    .post-primary .photo { object-position: 56% center; }
+    .post-primary::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(29,30,31,.94), rgba(29,30,31,.18) 84%); }
+    .post-primary .content { position: absolute; z-index: 3; left: 7%; right: 7%; top: 43%; color: white; }
+    .post-primary .headline { font-size: 11cqw; }
+    .post-primary .headline span { color: var(--yellow); }
+    .post-primary .micro { margin-top: 7%; color: white; }
+    .post-primary .accent { position: absolute; z-index: 4; left: 7%; bottom: 8%; width: 34%; }
+
+    .post-carousel { padding: 7%; background: var(--yellow); color: var(--ink); }
+    .post-carousel::before { content: ""; position: absolute; inset: 0; opacity: .08; background-image: linear-gradient(var(--ink) 1px, transparent 1px), linear-gradient(90deg, var(--ink) 1px, transparent 1px); background-size: 12.5% 10%; }
+    .post-carousel .number { position: relative; z-index: 2; margin: 22% 0 7%; font-size: 31cqw; font-weight: 900; line-height: .7; letter-spacing: -.1em; }
+    .post-carousel .rule { position: relative; z-index: 2; height: 1.6cqw; background: var(--ink); }
+    .post-carousel .headline { margin-top: 11%; }
+    .post-carousel .cta { position: absolute; z-index: 4; left: 7%; right: 7%; bottom: 7%; padding: 6%; background: var(--ink); color: white; font-size: 7cqw; font-weight: 900; line-height: 1; }
+
+    .story-delivery .photo { object-position: 55% center; }
+    .story-delivery::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(29,30,31,.1) 28%, rgba(29,30,31,.94) 100%); }
+    .story-delivery .content { position: absolute; z-index: 3; left: 7%; right: 7%; bottom: 15%; color: white; }
+    .story-delivery .headline { font-size: 12cqw; }
+    .story-delivery .accent { margin: 8% 0; width: 56%; }
+    .story-delivery .micro { font-size: 5cqw; }
+
+    .reel-paint .photo { object-position: 62% center; }
+    .reel-paint::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(29,30,31,.95), rgba(29,30,31,.12) 86%); }
+    .reel-paint .content { position: absolute; z-index: 3; left: 8%; right: 7%; top: 38%; color: white; }
+    .reel-paint .headline { font-size: 11cqw; }
+    .reel-paint .headline span { color: var(--yellow); }
+    .reel-paint .accent { position: absolute; left: 8%; bottom: 15%; width: 34%; }
+
+    .story-hours { background: var(--yellow); color: var(--ink); }
+    .story-hours .photo { top: 70%; height: 30%; opacity: .36; filter: sepia(1) saturate(1.3); }
+    .story-hours .content { position: absolute; z-index: 3; left: 7%; right: 7%; top: 32%; }
+    .story-hours .headline { font-size: 10cqw; }
+    .story-hours .time { margin: 17% 0 0; font-size: 8cqw; font-weight: 900; line-height: 1.15; letter-spacing: -.04em; }
+    .story-hours .rule { width: 100%; height: 1.2cqw; margin: 10% 0 7%; background: var(--ink); }
+    .story-hours .micro { font-size: 4cqw; }
+
+    .safe-zone { position: absolute; z-index: 10; left: 0; right: 0; display: none; pointer-events: none; border-color: rgba(255,255,255,.75); background: rgba(249,182,43,.16); color: white; font-size: 3cqw; font-weight: 800; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
+    .safe-zone--top { top: 0; height: 10%; border-bottom: 2px dashed rgba(255,255,255,.75); }
+    .safe-zone--bottom { bottom: 0; height: 14%; border-top: 2px dashed rgba(255,255,255,.75); }
+    body.show-safe .safe-zone { display: grid; place-items: center; }
+
+    .adaptation { display: grid; grid-template-columns: 1.15fr .72fr; gap: 48px; align-items: end; max-width: 1080px; margin-inline: auto; }
+    .adaptation .preview { background: white; }
+    .adaptation-note { max-width: 760px; margin: 36px auto 0; color: var(--muted); font-size: 17px; line-height: 1.6; }
+
+    footer { padding: 48px 0; border-top: 1px solid var(--line); background: white; color: var(--muted); }
+    footer a { color: var(--ink); font-weight: 800; }
+
+    @media (max-width: 1050px) {
+      .format-grid--feed { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .format-grid--vertical { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .section-head { grid-template-columns: 1fr; gap: 18px; }
+    }
+
+    @media (max-width: 680px) {
+      .page-header { padding-bottom: 52px; }
+      .page-header h1 { margin-top: 60px; }
+      .status { display: none; }
+      .header-meta { gap: 0; }
+      .toolbar strong { font-size: 12px; }
+      .format-grid--feed, .format-grid--vertical, .adaptation { grid-template-columns: 1fr; }
+      .section { padding: 64px 0; }
+      .preview { padding: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <div class="shell">
+      <div class="brand-row">
+        <img src="../../Rolumi_logo_white_yellowSymbol.svg" alt="ROLUMI Stavebniny">
+        <div class="header-meta">
+          <a class="back" href="../index.html">← Design system</a>
+          <span class="status">Schválené pravidlá</span>
+        </div>
+      </div>
+      <h1>Social media <span>bez vizuálneho šumu.</span></h1>
+      <p>Jedna jasná myšlienka na formát. Fotografia, pevná typografia a žltá ako funkčný signál — bez oválnych prvkov.</p>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <div class="shell toolbar-inner">
+      <strong>FB + Instagram / schválený systém</strong>
+      <button class="toggle" id="safeToggle" type="button" aria-pressed="false">Ukázať safe zones</button>
+    </div>
+  </div>
+
+  <main>
+    <section class="section">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">01 / Feed a carousel</p>
+            <h2>Primárny formát 4 : 5.</h2>
+          </div>
+          <p class="section-intro">Spoločný základ pre Facebook a Instagram. Dva primárne varianty — žltý informačný panel a fotografia cez celý formát — plus samostatný carousel cover.</p>
+        </div>
+
+        <div class="format-grid format-grid--feed">
+          <div>
+            <div class="format-meta"><span>Primárny · žltý panel</span><span>1080 × 1350</span></div>
+            <div class="preview">
+              <article class="artboard artboard--feed post-service">
+                <img class="photo" src="assets/web/CN8A1259.webp" alt="Rozostavaný dom a materiál">
+                <div class="content">
+                  <p class="headline">Dovezieme.</p>
+                  <p class="micro">0907 739 255</p>
+                </div>
+                <span class="brand-mark"><img src="assets/symbol-white.svg" alt="Znak ROLUMI"></span>
+              </article>
+            </div>
+          </div>
+
+          <div>
+            <div class="format-meta"><span>Primárny · fotografia</span><span>1080 × 1350</span></div>
+            <div class="preview">
+              <article class="artboard artboard--feed post-primary">
+                <img class="photo" src="assets/web/CN8A1259.webp" alt="Rozostavaný dom a materiál">
+                <div class="content">
+                  <p class="headline">Materiál.<br><span>Dovezieme.</span></p>
+                  <p class="micro">0907 739 255</p>
+                </div>
+                <span class="brand-mark"><img src="assets/symbol-white.svg" alt="Znak ROLUMI"></span>
+                <div class="accent" aria-hidden="true"></div>
+              </article>
+            </div>
+          </div>
+
+          <div>
+            <div class="format-meta"><span>Carousel cover</span><span>1080 × 1350</span></div>
+            <div class="preview">
+              <article class="artboard artboard--feed post-carousel">
+                <span class="brand-mark"><img src="assets/symbol-black.svg" alt="Znak ROLUMI"></span>
+                <div class="number">03</div>
+                <div class="rule" aria-hidden="true"></div>
+                <p class="headline">Ako vybrať?</p>
+                <div class="cta">TIPY →</div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--white">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">02 / Stories a Reels</p>
+            <h2>Vertikál 9 : 16 s priestorom pre UI.</h2>
+          </div>
+          <p class="section-intro">Kľúčové posolstvo držíme v centrálnej bezpečnej ploche. Logo a CTA sa vyhýbajú horným aj spodným ovládacím prvkom platformy.</p>
+        </div>
+
+        <div class="format-grid format-grid--vertical">
+          <div>
+            <div class="format-meta"><span>Story · služba</span><span>1080 × 1920</span></div>
+            <div class="preview">
+              <article class="artboard artboard--vertical story-delivery">
+                <img class="photo" src="assets/web/CN8A1259.webp" alt="Dovoz stavebného materiálu">
+                <span class="brand-mark"><img src="assets/symbol-white.svg" alt="Znak ROLUMI"></span>
+                <div class="content">
+                  <p class="headline">Dovezieme.</p>
+                  <div class="accent" aria-hidden="true"></div>
+                  <p class="micro">0907 739 255</p>
+                </div>
+                <div class="safe-zone safe-zone--top">UI platformy</div>
+                <div class="safe-zone safe-zone--bottom">UI platformy</div>
+              </article>
+            </div>
+          </div>
+
+          <div>
+            <div class="format-meta"><span>Reel cover · produkt</span><span>1080 × 1920</span></div>
+            <div class="preview">
+              <article class="artboard artboard--vertical reel-paint">
+                <img class="photo" src="assets/web/IMG_6504.webp" alt="Farby v predajni ROLUMI">
+                <span class="brand-mark"><img src="assets/symbol-white.svg" alt="Znak ROLUMI"></span>
+                <div class="content">
+                  <p class="headline">Presný<br>odtieň.<br><span>Na počkanie.</span></p>
+                </div>
+                <div class="accent" aria-hidden="true"></div>
+                <div class="safe-zone safe-zone--top">UI platformy</div>
+                <div class="safe-zone safe-zone--bottom">UI platformy</div>
+              </article>
+            </div>
+          </div>
+
+          <div>
+            <div class="format-meta"><span>Story · oznam</span><span>1080 × 1920</span></div>
+            <div class="preview">
+              <article class="artboard artboard--vertical story-hours">
+                <img class="photo" src="assets/web/IMG_5047.webp" alt="Interiér predajne ROLUMI">
+                <span class="brand-mark"><img src="assets/symbol-black.svg" alt="Znak ROLUMI"></span>
+                <div class="content">
+                  <p class="headline">Dnes otvorené.</p>
+                  <div class="time">8:00 — 12:00<br>13:00 — 16:30</div>
+                  <div class="rule" aria-hidden="true"></div>
+                  <p class="micro">PONDELOK — PIATOK</p>
+                </div>
+                <div class="safe-zone safe-zone--top">UI platformy</div>
+                <div class="safe-zone safe-zone--bottom">UI platformy</div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">03 / Adaptácia</p>
+            <h2>Ten istý obsah nie je iba orez.</h2>
+          </div>
+          <p class="section-intro">Pri zmene pomeru sa nanovo skladá hierarchia, poloha textu a výrez fotografie. Vďaka tomu nevzniká jeden kompromisný obrázok pre všetky umiestnenia.</p>
+        </div>
+
+        <div class="adaptation">
+          <div>
+            <div class="format-meta"><span>Feed</span><span>4 : 5</span></div>
+            <div class="preview">
+              <article class="artboard artboard--feed post-service">
+                <img class="photo" src="assets/web/CN8A1259.webp" alt="Rozostavaný dom a materiál">
+                <div class="content"><p class="headline">Dovezieme.</p><p class="micro">0907 739 255</p></div>
+                <span class="brand-mark"><img src="assets/symbol-white.svg" alt="Znak ROLUMI"></span>
+              </article>
+            </div>
+          </div>
+          <div>
+            <div class="format-meta"><span>Story / Reel</span><span>9 : 16</span></div>
+            <div class="preview">
+              <article class="artboard artboard--vertical story-delivery">
+                <img class="photo" src="assets/web/CN8A1259.webp" alt="Dovoz stavebného materiálu">
+                <span class="brand-mark"><img src="assets/symbol-white.svg" alt="Znak ROLUMI"></span>
+                <div class="content"><p class="headline">Dovezieme.</p><div class="accent" aria-hidden="true"></div><p class="micro">0907 739 255</p></div>
+                <div class="safe-zone safe-zone--top">UI platformy</div>
+                <div class="safe-zone safe-zone--bottom">UI platformy</div>
+              </article>
+            </div>
+          </div>
+        </div>
+        <p class="adaptation-note">Rozdiel je zámerný: feed používa pevnú žltú informačnú plochu, vertikál necháva fotografiu pracovať cez celý formát a text drží v bezpečnej zóne.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">Schválená podstránka ROLUMI Design Systemu pre sociálne siete.</div>
+  </footer>
+
+  <script>
+    const safeToggle = document.querySelector("#safeToggle");
+    safeToggle.addEventListener("click", () => {
+      const active = document.body.classList.toggle("show-safe");
+      safeToggle.setAttribute("aria-pressed", String(active));
+      safeToggle.textContent = active ? "Skryť safe zones" : "Ukázať safe zones";
+    });
+  </script>
+</body>
+</html>

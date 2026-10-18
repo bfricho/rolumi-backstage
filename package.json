@@ -1,0 +1,24 @@
+{
+  "name": "rolumi-backstage",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Private, deployable knowledge portal for the ROLUMI roadmap and supporting documents.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "content:sync": "node scripts/sync-content.mjs",
+    "dev": "node --watch src/server.js",
+    "lint": "node scripts/lint.mjs",
+    "start": "node dist/server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "markdown-it": "^14.1.0",
+    "pg": "^8.16.3",
+    "sanitize-html": "^2.17.0"
+  }
+}

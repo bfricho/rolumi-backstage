@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ROLUMI Design System</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="tokens.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--color-background);
+      color: var(--color-text);
+      font-family: var(--font-brand);
+      font-size: var(--font-size-body);
+      line-height: var(--line-height-body);
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+    :focus-visible { outline: var(--focus-width) solid var(--rolumi-yellow); outline-offset: var(--focus-offset); }
+    .shell { width: min(calc(100% - 40px), var(--content-max)); margin-inline: auto; }
+    .section { padding-block: var(--space-16); }
+    .section--subtle { background: var(--color-background-subtle); }
+    .section--dark { background: var(--rolumi-ink); color: var(--rolumi-white); }
+    .eyebrow {
+      margin: 0 0 var(--space-4);
+      color: var(--rolumi-yellow);
+      font-size: var(--font-size-label);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-weight: var(--font-weight-bold); letter-spacing: -0.03em; }
+    h1 { max-width: 12ch; font-size: var(--font-size-display); line-height: var(--line-height-display); }
+    h2 { margin-bottom: var(--space-8); font-size: var(--font-size-heading-1); line-height: 1.05; }
+    h3 { font-size: var(--font-size-heading-3); line-height: 1.2; }
+    .lead { max-width: var(--text-max); font-size: var(--font-size-body-large); }
+    .hero { position: relative; overflow: hidden; padding-block: var(--space-8) var(--space-24); background: var(--rolumi-ink); color: white; }
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -7rem;
+      bottom: -8rem;
+      width: 26rem;
+      height: 26rem;
+      border: 1px solid color-mix(in srgb, var(--rolumi-yellow) 34%, transparent);
+      transform: skewX(-28deg) rotate(-16deg);
+    }
+    .brand-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-24); }
+    .brand-bar img { width: 190px; }
+    .version { color: var(--rolumi-neutral-300); font-size: var(--font-size-small); }
+    .hero h1 span { color: var(--rolumi-yellow); }
+    .hero .lead { color: var(--rolumi-neutral-200); }
+    .grid { display: grid; gap: var(--grid-gap); }
+    .grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .swatch { min-height: 230px; padding: var(--space-6); display: flex; flex-direction: column; justify-content: flex-end; border: 1px solid var(--color-border); }
+    .swatch strong { font-size: var(--font-size-heading-3); }
+    .swatch small { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .swatch--ink { background: var(--rolumi-ink); color: white; border-color: var(--rolumi-ink); }
+    .swatch--yellow { background: var(--rolumi-yellow); color: var(--rolumi-ink); border-color: var(--rolumi-yellow); }
+    .swatch--white { background: white; }
+    .type-sample { padding-block: var(--space-8); border-top: 1px solid var(--color-border); }
+    .type-sample:last-child { border-bottom: 1px solid var(--color-border); }
+    .type-sample__meta { color: var(--color-text-muted); font-size: var(--font-size-small); }
+    .type-display { margin: 0; font-size: var(--font-size-display); font-weight: 800; line-height: 1; letter-spacing: -0.04em; }
+    .type-body { max-width: var(--text-max); margin: 0; font-size: var(--font-size-body-large); }
+    .logo-card { min-height: 260px; padding: var(--space-8); display: grid; place-items: center; border: 1px solid var(--color-border); }
+    .logo-card img { width: min(220px, 80%); }
+    .logo-card--dark { background: var(--rolumi-ink); border-color: var(--rolumi-ink); }
+    .logo-card--yellow { background: var(--rolumi-yellow); border-color: var(--rolumi-yellow); }
+    .logo-card--photo {
+      background: linear-gradient(120deg, rgba(29,30,31,.92), rgba(29,30,31,.46)),
+                  repeating-linear-gradient(135deg, #606367 0 24px, #444649 24px 48px);
+    }
+    .demo-heading { margin-top: var(--space-16); margin-bottom: var(--space-4); }
+    .demo-heading strong { display: block; font-size: var(--font-size-heading-3); }
+    .demo-heading span { color: var(--color-text-muted); font-size: var(--font-size-small); }
+    .full-bleed { width: 100vw; margin-left: calc(50% - 50vw); }
+    .oval-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--grid-gap); }
+    .oval-demo { position: relative; min-height: 520px; overflow: hidden; padding: var(--space-8); }
+    .oval-demo--light { background: #f4f2ec; }
+    .oval-demo--white { background: white; border: 1px solid var(--color-border); }
+    .oval-demo--yellow { background: var(--rolumi-yellow); }
+    .oval-demo--dark { background: var(--rolumi-neutral-800); color: white; }
+    .demo-kicker { margin-bottom: var(--space-6); color: var(--color-text-muted); font-size: var(--font-size-label); font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    .oval-demo--yellow .demo-kicker { color: var(--rolumi-ink); }
+    .oval-demo--dark .demo-kicker { color: var(--rolumi-yellow); }
+    .oval-demo h3 { position: relative; z-index: 2; margin: 0; font-size: clamp(2rem, 4vw, 3.5rem); }
+    .oval-wide { width: 100%; aspect-ratio: 1.9; margin-bottom: var(--space-6); border-radius: var(--radius-image-capsule); object-fit: cover; }
+    .oval-pair { min-height: 410px; display: flex; align-items: center; justify-content: center; gap: var(--space-8); }
+    .oval-pair img { width: 38%; height: 390px; border-radius: var(--radius-image-capsule); object-fit: cover; }
+    .oval-pair img:last-child { height: 320px; }
+    .oval-edge-image { position: absolute; right: -14%; bottom: -12%; width: 78%; aspect-ratio: 1; border-radius: 50%; object-fit: cover; }
+    .oval-focus { width: 86%; aspect-ratio: 2.1; margin: var(--space-16) auto 0; border-radius: var(--radius-image-capsule); object-fit: cover; }
+    .oval-focus-line { width: 72%; height: 8px; margin: var(--space-8) auto 0; background: var(--rolumi-yellow); }
+    .photo-hero-live { position: relative; min-height: clamp(460px, 55vw, 720px); display: grid; align-items: end; overflow: hidden; background: linear-gradient(90deg, rgba(29,30,31,.92), rgba(29,30,31,.12) 68%), url("assets/photography/place.webp") center/cover no-repeat; color: white; }
+    .photo-hero-live > img { position: absolute; top: var(--space-12); left: max(var(--space-8), calc((100vw - var(--content-max)) / 2)); width: 220px; }
+    .photo-hero-content { width: min(calc(100% - 40px), var(--content-max)); margin: 0 auto; padding-bottom: var(--space-16); }
+    .photo-hero-content h3 { max-width: 9ch; margin: 0; font-size: clamp(3rem, 7vw, 6.5rem); line-height: .96; }
+    .accent-line { width: 180px; height: 10px; margin-top: var(--space-8); background: var(--rolumi-yellow); }
+    .photo-clean-edge { width: 100%; height: clamp(360px, 50vw, 680px); object-fit: cover; }
+    .clean-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--grid-gap); margin-top: var(--space-8); }
+    .clean-example { margin: 0; }
+    .clean-example img { width: 100%; aspect-ratio: 4 / 5; border-radius: var(--radius-image-inset); object-fit: cover; }
+    .clean-example figcaption { padding-top: var(--space-3); color: var(--color-text-muted); font-size: var(--font-size-small); }
+    .component-card { padding: var(--space-8); border: 1px solid var(--color-border); background: white; }
+    .actions { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
+    .button {
+      min-height: 48px;
+      padding: 12px 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--rolumi-yellow);
+      background: var(--rolumi-yellow);
+      color: var(--rolumi-ink);
+      font: 800 0.875rem/1 var(--font-brand);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background var(--motion-fast), color var(--motion-fast), border-color var(--motion-fast);
+    }
+    .button:hover { border-color: var(--rolumi-ink); background: var(--rolumi-ink); color: white; }
+    .button--secondary { border-color: var(--rolumi-ink); background: transparent; }
+    .button--secondary:hover { border-color: var(--rolumi-yellow); background: var(--rolumi-yellow); color: var(--rolumi-ink); }
+    .notice { padding: var(--space-6); border-left: 6px solid var(--rolumi-yellow); background: var(--rolumi-ink); color: white; }
+    .field { display: grid; gap: var(--space-2); max-width: 420px; }
+    .field label { font-size: var(--font-size-small); font-weight: 800; }
+    .field input { min-height: 48px; padding-inline: var(--space-4); border: 1px solid var(--color-border-strong); border-radius: 0; font: inherit; }
+    .field input:focus { outline: 3px solid var(--rolumi-yellow); outline-offset: 2px; border-color: var(--rolumi-ink); }
+    .spacing-row { display: grid; grid-template-columns: 70px 1fr 70px; gap: var(--space-4); align-items: center; padding-block: var(--space-3); border-top: 1px solid var(--color-border); }
+    .spacing-block { height: 18px; background: var(--rolumi-yellow); }
+    .notes { color: var(--color-text-muted); }
+    .social-panel { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-8); align-items: end; padding: var(--space-12); background: var(--rolumi-ink); color: white; }
+    .social-panel h3 { max-width: 12ch; margin-bottom: var(--space-4); font-size: var(--font-size-heading-1); line-height: 1; }
+    .social-panel p { max-width: var(--text-max); margin-bottom: 0; color: var(--rolumi-neutral-200); }
+    footer { padding-block: var(--space-12); border-top: 1px solid var(--color-border); }
+    @media (max-width: 800px) {
+      .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; }
+      .oval-grid, .clean-grid { grid-template-columns: 1fr; }
+      .oval-demo { min-height: 460px; }
+      .oval-pair { min-height: 350px; }
+      .oval-pair img { height: 330px; }
+      .oval-pair img:last-child { height: 270px; }
+      .clean-example img { border-radius: var(--radius-image-inset-mobile); }
+      .photo-hero-live > img { left: 20px; width: 170px; }
+      .social-panel { grid-template-columns: 1fr; padding: var(--space-8); }
+      .brand-bar { margin-bottom: var(--space-16); }
+      .section { padding-block: var(--space-12); }
+      .hero { padding-bottom: var(--space-16); }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="shell">
+      <div class="brand-bar">
+        <img src="../Rolumi_logo_white_yellowSymbol.svg" alt="ROLUMI Stavebniny">
+        <span class="version">Design System 1.2</span>
+      </div>
+      <p class="eyebrow">Existujúca značka, prakticky spracovaná</p>
+      <h1>Pevná značka pre <span>reálnu prácu.</span></h1>
+      <p class="lead">Kontrastná identita postavená na grafitovej, žltej, výraznej typografii a autentickom obraze stavebníctva.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="shell">
+        <p class="eyebrow">01 / Farby</p>
+        <h2>Malá paleta, jasná hierarchia.</h2>
+        <div class="grid grid--3">
+          <article class="swatch swatch--ink"><strong>Grafitová</strong><small>#1D1E1F</small></article>
+          <article class="swatch swatch--yellow"><strong>Žltá</strong><small>#F9B62B</small></article>
+          <article class="swatch swatch--white"><strong>Biela</strong><small>#FFFFFF</small></article>
+        </div>
+        <p class="notes">Grafitová na žltej má kontrast 9.35 : 1. Bielu na žltej nepoužívame pre text.</p>
+      </div>
+    </section>
+
+    <section class="section section--subtle">
+      <div class="shell">
+        <p class="eyebrow">02 / Typografia</p>
+        <h2>Inter drží komunikáciu priamu a súčasnú.</h2>
+        <div class="type-sample">
+          <p class="type-sample__meta">Inter ExtraBold / Display</p>
+          <p class="type-display">Staviame na skúsenostiach.</p>
+        </div>
+        <div class="type-sample">
+          <p class="type-sample__meta">Inter Regular / Body</p>
+          <p class="type-body">ROLUMI spája predaj stavebného materiálu, odborné poradenstvo a skúsenosť s realizáciou stavieb.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <p class="eyebrow">03 / Logo</p>
+        <h2>Variant vyberá pozadie.</h2>
+        <div class="grid grid--2">
+          <div class="logo-card"><img src="../Rolumi_logo.svg" alt="Primárne farebné logo"></div>
+          <div class="logo-card logo-card--dark"><img src="../Rolumi_logo_white_yellowSymbol.svg" alt="Biele logo so žltým symbolom"></div>
+          <div class="logo-card logo-card--yellow"><img src="../Rolumi_logo_black(Brand).svg" alt="Grafitové logo na žltom pozadí"></div>
+          <div class="logo-card logo-card--photo"><img src="../Rolumi_logo_white.svg" alt="Biele logo na fotografickom pozadí"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--subtle">
+      <div class="shell">
+        <p class="eyebrow">04 / Fotografia</p>
+        <h2>Autentický obraz v troch výrazových úrovniach.</h2>
+        <p class="lead">Ovál používame ako zámerný motív. Veľkoformátová fotografia môže niesť obsah alebo zostať úplne čistá. Bežné UI fotografie ostávajú pravouhlé.</p>
+        <div class="demo-heading">
+          <strong>01 / Oválne kompozície</strong>
+          <span>Živá HTML ukážka štyroch schválených princípov.</span>
+        </div>
+        <div class="oval-grid">
+          <article class="oval-demo oval-demo--light">
+            <p class="demo-kicker">Široký ovál</p>
+            <img class="oval-wide" src="assets/photography/place.webp" alt="Predajňa ROLUMI v širokom oválnom výreze">
+            <h3>Miesto.</h3>
+          </article>
+          <article class="oval-demo oval-demo--white">
+            <p class="demo-kicker">Dvojica kapsúl</p>
+            <div class="oval-pair">
+              <img src="assets/photography/process.webp" alt="Rozostavaný dom">
+              <img src="assets/photography/material.webp" alt="Stavebný materiál">
+            </div>
+          </article>
+          <article class="oval-demo oval-demo--yellow">
+            <p class="demo-kicker">Ovál po hranu modulu</p>
+            <h3>Sortiment.</h3>
+            <img class="oval-edge-image" src="assets/photography/assortment.webp" alt="Sortiment predajne v kruhovom výreze">
+          </article>
+          <article class="oval-demo oval-demo--dark">
+            <p class="demo-kicker">Jeden bod pozornosti</p>
+            <h3>Detail.</h3>
+            <img class="oval-focus" src="assets/photography/detail.webp" alt="Detail stavebného materiálu v kapsulovom výreze">
+            <div class="oval-focus-line" aria-hidden="true"></div>
+          </article>
+        </div>
+
+        <div class="demo-heading">
+          <strong>02 / Veľkoformátová fotografia s obsahom</strong>
+          <span>Fotografia siaha po okraj a nesie krátke posolstvo bez samostatného textového bloku.</span>
+        </div>
+      </div>
+
+      <div class="full-bleed photo-hero-live">
+        <img src="../Rolumi_logo_white.svg" alt="ROLUMI Stavebniny">
+        <div class="photo-hero-content">
+          <h3>Miesto pre vašu stavbu.</h3>
+          <div class="accent-line" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <div class="shell">
+        <div class="demo-heading">
+          <strong>03 / Čistá veľkoformátová fotografia</strong>
+          <span>Bez textu, loga, stmavenia alebo grafického overlayu.</span>
+        </div>
+      </div>
+
+      <div class="full-bleed">
+        <img class="photo-clean-edge" src="assets/photography/place.webp" alt="Čistá full-bleed fotografia predajne ROLUMI">
+      </div>
+
+      <div class="shell">
+        <div class="clean-grid">
+          <figure class="clean-example">
+            <img src="assets/photography/realization.webp" alt="Čistá fotografia realizácie s jemným zaoblením">
+            <figcaption>Veľký obraz v layoute · radius 24px desktop / 16px mobil</figcaption>
+          </figure>
+          <figure class="clean-example">
+            <img src="assets/photography/assortment.webp" alt="Čistá fotografia sortimentu s jemným zaoblením">
+            <figcaption>Veľký obraz v layoute · radius 24px desktop / 16px mobil</figcaption>
+          </figure>
+        </div>
+        <p class="notes">Kompletné pravidlá výberu, orezania, radiusu a textu na fotografii sú v <a href="photography.md">photography.md</a>.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <p class="eyebrow">05 / Komponenty</p>
+        <h2>Funkčné, hranaté, bez dekoratívneho šumu.</h2>
+        <div class="grid grid--2">
+          <article class="component-card">
+            <h3>Akcie</h3>
+            <p>Žltá označuje hlavný krok. Sekundárna akcia ostáva pokojná.</p>
+            <div class="actions">
+              <a class="button" href="#components">Získať ponuku</a>
+              <a class="button button--secondary" href="#components">Naše služby</a>
+            </div>
+          </article>
+          <article class="component-card">
+            <h3>Formulár</h3>
+            <div class="field">
+              <label for="email">E-mail</label>
+              <input id="email" type="email" placeholder="meno@firma.sk">
+            </div>
+          </article>
+          <article class="notice">
+            <p class="eyebrow">Dôležité</p>
+            <h3>Žltá je signál, nie dekorácia.</h3>
+            <p>Najsilnejšie funguje v malom množstve proti grafitovej alebo ako jasné CTA.</p>
+          </article>
+          <article class="component-card">
+            <p class="eyebrow">Referencie</p>
+            <h3>Výsledok práce má hovoriť konkrétne.</h3>
+            <p>Ukáž reálnu realizáciu, rozsah, miesto, použitý materiál a prínos pre zákazníka.</p>
+            <a href="#components">Pozrieť realizáciu</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--subtle" id="components">
+      <div class="shell">
+        <p class="eyebrow">06 / Spacing</p>
+        <h2>Štvorbodová mriežka.</h2>
+        <div class="spacing-row"><code>space-2</code><span class="spacing-block" style="width:8px"></span><span>8px</span></div>
+        <div class="spacing-row"><code>space-4</code><span class="spacing-block" style="width:16px"></span><span>16px</span></div>
+        <div class="spacing-row"><code>space-6</code><span class="spacing-block" style="width:24px"></span><span>24px</span></div>
+        <div class="spacing-row"><code>space-8</code><span class="spacing-block" style="width:32px"></span><span>32px</span></div>
+        <div class="spacing-row"><code>space-12</code><span class="spacing-block" style="width:48px"></span><span>48px</span></div>
+        <div class="spacing-row"><code>space-16</code><span class="spacing-block" style="width:64px"></span><span>64px</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <p class="eyebrow">07 / Sociálne siete</p>
+        <div class="social-panel">
+          <div>
+            <h3>Formát podľa platformy.</h3>
+            <p>Schválené feed posty, carousel cover, Stories a Reels vrátane samostatného znaku, jeho ochrannej zóny a bezpečných plôch platformy.</p>
+          </div>
+          <a class="button" href="socials/index.html">Otvoriť social systém</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <strong>ROLUMI Design System</strong>
+      <p class="notes">Spracovanie existujúcej identity. Nie je to rebranding.</p>
+    </div>
+  </footer>
+</body>
+</html>

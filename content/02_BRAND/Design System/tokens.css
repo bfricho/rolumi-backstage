@@ -1,0 +1,78 @@
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/InterVariable.woff2") format("woff2-variations");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  /* Brand source */
+  --rolumi-ink: #1d1e1f;
+  --rolumi-yellow: #f9b62b;
+  --rolumi-white: #ffffff;
+
+  /* System neutrals */
+  --rolumi-neutral-800: #2a2b2d;
+  --rolumi-neutral-700: #444649;
+  --rolumi-neutral-600: #606367;
+  --rolumi-neutral-300: #c7c9cb;
+  --rolumi-neutral-200: #dfe1e2;
+  --rolumi-neutral-100: #f1f2f2;
+  --rolumi-neutral-50: #f8f8f7;
+
+  /* Semantic aliases */
+  --color-text: var(--rolumi-ink);
+  --color-text-muted: var(--rolumi-neutral-600);
+  --color-text-inverse: var(--rolumi-white);
+  --color-background: var(--rolumi-white);
+  --color-background-subtle: var(--rolumi-neutral-50);
+  --color-background-inverse: var(--rolumi-ink);
+  --color-accent: var(--rolumi-yellow);
+  --color-border: var(--rolumi-neutral-200);
+  --color-border-strong: var(--rolumi-neutral-300);
+
+  /* Typography */
+  --font-brand: Inter, Arial, Helvetica, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-bold: 800;
+  --font-size-label: 0.75rem;
+  --font-size-small: 0.875rem;
+  --font-size-body: 1rem;
+  --font-size-body-large: 1.25rem;
+  --font-size-heading-3: 1.5rem;
+  --font-size-heading-2: clamp(1.75rem, 3vw, 2.5rem);
+  --font-size-heading-1: clamp(2.25rem, 4vw, 3.5rem);
+  --font-size-display: clamp(2.75rem, 6vw, 4.5rem);
+  --line-height-display: 1;
+  --line-height-heading: 1.1;
+  --line-height-body: 1.6;
+
+  /* Spacing: 4px grid */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  /* Shape and layout */
+  --radius-none: 0;
+  --radius-functional: 2px;
+  --radius-image-inset-mobile: 16px;
+  --radius-image-inset: 24px;
+  --radius-image-capsule: 999px;
+  --border-width: 1px;
+  --content-max: 75rem;
+  --text-max: 42rem;
+  --grid-gap: 1.5rem;
+
+  /* Interaction */
+  --focus-width: 3px;
+  --focus-offset: 2px;
+  --motion-fast: 160ms;
+  --motion-standard: 240ms;
+}
