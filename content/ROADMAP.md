@@ -6,7 +6,11 @@ Tento dokument zachytáva dohodnuté poradie budovania firemnej knowledge base a
 
 ## 1. História
 
-Spracovať príbeh, vývoj a dôležité míľniky spoločnosti.
+**Stav: spracované 19. 10. 2026.**
+
+Príbeh ROLUMI, časová os, vybrané archívne fotografie a komunikačný základ značky sú zachytené v samostatnom dokumente. Presné historické fakty sú oddelené od približných rodinných spomienok a všetky pôvodné podklady zostávajú v archíve.
+
+Podrobnosti: [Otvoriť vizuálnu HTML históriu](./01_HISTORIA/HISTORIA_ROLUMI.html) · [Textový Markdown dokument](./01_HISTORIA/HISTORIA_ROLUMI.md)
 
 ## 2. Brand
 

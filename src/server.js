@@ -13,8 +13,11 @@ import {
 } from './auth.js';
 import { config } from './config.js';
 import {
+  HISTORY_HTML_PATH,
+  HISTORY_MARKDOWN_PATH,
   loadContentIndex,
   makeExcerpt,
+  renderHistoryStory,
   renderMarkdown,
   renderRoadmapTimeline,
   safeContentPath,
@@ -24,6 +27,7 @@ import { createDatabase } from './database.js';
 import { verifyTurnstile } from './turnstile.js';
 import {
   documentPage,
+  historyPage,
   loginPage,
   notFoundPage,
   roadmapPage,
@@ -173,7 +177,21 @@ app.get('/roadmap', async (request, response, next) => {
   }
 });
 
+app.get('/history', async (request, response, next) => {
+  try {
+    const source = await fs.readFile(safeContentPath(config.contentRoot, HISTORY_HTML_PATH), 'utf8');
+    response.send(historyPage({
+      appName: config.appName,
+      documents: contentIndex.documents,
+      story: renderHistoryStory(source),
+    }));
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.get('/sections/:folder', (request, response) => {
+  if (request.params.folder === '01_HISTORIA') return response.redirect(303, '/history');
   const section = sections.find((item) => item.folder === request.params.folder);
   if (!section) return response.status(404).send(notFoundPage({ appName: config.appName, documents: contentIndex.documents }));
   return response.send(sectionPage({ appName: config.appName, documents: contentIndex.documents, section }));
@@ -182,6 +200,7 @@ app.get('/sections/:folder', (request, response) => {
 app.get(/^\/docs\/(.+)$/, async (request, response, next) => {
   try {
     const relativePath = decodeURIComponent(request.params[0]);
+    if (relativePath === HISTORY_MARKDOWN_PATH) return response.redirect(303, '/history');
     if (!relativePath.toLowerCase().endsWith('.md') || !contentIndex.allFiles.has(relativePath)) {
       return response.status(404).send(notFoundPage({ appName: config.appName, documents: contentIndex.documents }));
     }
@@ -208,6 +227,8 @@ app.get(/^\/content\/(.+)$/, async (request, response, next) => {
     if (!contentIndex.allFiles.has(relativePath)) {
       return response.status(404).send(notFoundPage({ appName: config.appName, documents: contentIndex.documents }));
     }
+    if (relativePath === HISTORY_HTML_PATH) return response.redirect(303, '/history');
+    if (relativePath === HISTORY_MARKDOWN_PATH) return response.redirect(303, '/history');
     if (relativePath.toLowerCase().endsWith('.md')) return response.redirect(303, `/docs/${request.params[0]}`);
     response.set('Content-Disposition', 'inline');
     return response.sendFile(safeContentPath(config.contentRoot, relativePath), { dotfiles: 'deny' });

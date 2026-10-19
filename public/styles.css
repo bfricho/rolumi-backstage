@@ -396,9 +396,11 @@ a { -webkit-tap-highlight-color: transparent; }
 
 .roadmap-link:hover,
 .side-section-link:hover,
-.roadmap-link.is-active { background: var(--neutral-100); }
+.roadmap-link.is-active,
+.side-section-link.is-active { background: var(--neutral-100); }
 
-.roadmap-link.is-active { box-shadow: inset 4px 0 0 var(--yellow); }
+.roadmap-link.is-active,
+.side-section-link.is-active { box-shadow: inset 4px 0 0 var(--yellow); }
 
 .side-sections { margin-top: 12px !important; border-top: 1px solid var(--neutral-200); padding-top: 12px !important; }
 
@@ -445,6 +447,22 @@ a { -webkit-tap-highlight-color: transparent; }
   container-name: roadmap-content;
   container-type: inline-size;
   background: #f5f5f2;
+}
+
+/* Embedded visual history */
+
+.main-content--history {
+  container-name: history-content;
+  container-type: inline-size;
+  padding: 0;
+  background: var(--neutral-50);
+}
+
+.main-content.main-content--history > .history-story {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  overflow: hidden;
 }
 
 .roadmap-manifesto {
@@ -899,6 +917,21 @@ a { -webkit-tap-highlight-color: transparent; }
 .markdown-body h3 { margin: 40px 0 16px; font-size: 23px; }
 .markdown-body h4 { margin: 32px 0 12px; font-size: 18px; }
 .markdown-body p { margin: 0 0 20px; }
+.markdown-body img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 32px 0 12px;
+  border-radius: 24px;
+  background: var(--neutral-100);
+}
+.markdown-body p:has(> img:only-child) { margin-bottom: 8px; }
+.markdown-body p:has(> img:only-child) + p:has(> em:only-child) {
+  margin-bottom: 28px;
+  color: var(--neutral-600);
+  font-size: 13px;
+  line-height: 1.5;
+}
 .markdown-body ul,
 .markdown-body ol { margin: 0 0 24px; padding-left: 24px; }
 .markdown-body li { margin: 7px 0; padding-left: 4px; }
@@ -1060,6 +1093,7 @@ a { -webkit-tap-highlight-color: transparent; }
   .section-count { display: none; }
   .roadmap-card { min-height: 230px; padding: 26px; }
   .markdown-body { padding: 32px 24px; }
+  .markdown-body img { border-radius: 16px; }
 }
 
 @media (max-width: 540px) {

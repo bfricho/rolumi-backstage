@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { roadmapPage } from '../src/views.js';
+import { historyPage, roadmapPage } from '../src/views.js';
 
 test('roadmap opens with the ROLUMI 2030 transformation headline', () => {
   const html = roadmapPage({
@@ -32,4 +32,22 @@ test('roadmap sidebar omits documents marked as hidden', () => {
 
   assert.doesNotMatch(html, /02_SKLAD_ROLUMI_A_OZNAMENIE/u);
   assert.match(html, /03_OPERACNY_MODEL_ROLUMI/u);
+});
+
+test('history opens inside the Backstage shell with one canonical navigation link', () => {
+  const historyPath = '01_HISTORIA/HISTORIA_ROLUMI.md';
+  const html = historyPage({
+    appName: 'ROLUMI Backstage',
+    documents: [{ path: historyPath, section: '01_HISTORIA', sidebar: true, title: 'História ROLUMI' }],
+    story: '<article class="history-story">Vizuálna história</article>',
+  });
+
+  assert.match(html, /class="topbar"/u);
+  assert.match(html, /class="sidebar"/u);
+  assert.match(html, /main-content--history/u);
+  assert.equal((html.match(/href="\/history"/gu) ?? []).length, 1);
+  assert.doesNotMatch(html, /\/sections\/01_HISTORIA/u);
+  assert.match(html, /side-section-link is-active/u);
+  assert.match(html, /<span>01<\/span>História ROLUMI/u);
+  assert.match(html, /Vizuálna história/u);
 });

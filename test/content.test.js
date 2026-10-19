@@ -3,6 +3,7 @@ import path from 'node:path';
 import test from 'node:test';
 import {
   loadContentIndex,
+  renderHistoryStory,
   renderMarkdown,
   renderRoadmapHtml,
   renderRoadmapTimeline,
@@ -16,6 +17,19 @@ test('markdown links stay inside the authenticated content routes', () => {
   );
   assert.match(html, /href="\/docs\/02_BRAND\/README.md"/);
   assert.match(html, /href="\/content\/02_BRAND\/Design%20System\/index.html"/);
+});
+
+test('markdown images stay inside the authenticated content routes', () => {
+  const html = renderMarkdown(
+    '![Historická predajňa](./assets/2010-predajna.jpg "Predajňa ROLUMI")',
+    '01_HISTORIA/HISTORIA_ROLUMI.md',
+  );
+
+  assert.match(html, /src="\/content\/01_HISTORIA\/assets\/2010-predajna\.jpg"/);
+  assert.match(html, /alt="Historická predajňa"/);
+  assert.match(html, /title="Predajňa ROLUMI"/);
+  assert.match(html, /loading="lazy"/);
+  assert.match(html, /decoding="async"/);
 });
 
 test('raw HTML is not executed by the markdown renderer', () => {
@@ -37,6 +51,22 @@ test('the roadmap timeline can be embedded in the Backstage shell without its st
   assert.match(html, /^<div class="roadmap-timeline"/u);
   assert.match(html, /href="\/docs\/02_BRAND\/BRAND_AUDIT\.md"/u);
   assert.doesNotMatch(html, /Standalone|Footer/u);
+});
+
+test('the visual history can be embedded in the Backstage shell without its standalone navigation', () => {
+  const source = `
+    <style>:root { --ink: #111; } body { color: var(--ink); } .hero { display: block; } @media (max-width: 900px) { .hero { display: grid; } }</style>
+    <header class="hero"><div class="wrap"><div class="topbar"><img src="../02_BRAND/logo.svg"><nav><a href="../ROADMAP.html">Roadmap</a></nav></div><div class="hero-content"><img src="assets/building.jpg"></div></div></header>
+    <main id="obsah"><section class="section"><h1>História</h1></section></main>
+    <footer>Standalone footer</footer>
+  `;
+  const html = renderHistoryStory(source);
+
+  assert.match(html, /class="history-story"/u);
+  assert.match(html, /\.history-story \.hero\s*\{/u);
+  assert.match(html, /@container history-content \(max-width: 900px\)/u);
+  assert.match(html, /src="\/content\/01_HISTORIA\/assets\/building\.jpg"/u);
+  assert.doesNotMatch(html, /class="topbar"|Standalone footer/u);
 });
 
 test('content paths reject traversal', () => {

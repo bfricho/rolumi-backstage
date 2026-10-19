@@ -1,4 +1,4 @@
-import { encodePath, sections } from './content.js';
+import { encodePath, HISTORY_MARKDOWN_PATH, sections } from './content.js';
 
 export function escapeHtml(value) {
   return String(value ?? '')
@@ -11,11 +11,21 @@ export function escapeHtml(value) {
 
 function documentNavigation(documents, currentPath = '') {
   return sections.map((section) => {
+    if (section.folder === '01_HISTORIA') {
+      return `
+        <li class="side-section">
+          <a class="side-section-link${currentPath === HISTORY_MARKDOWN_PATH ? ' is-active' : ''}" href="/history">
+            <span>${section.number}</span>História ROLUMI
+          </a>
+        </li>
+      `;
+    }
+
     const items = documents.filter((document) => document.section === section.folder && document.sidebar !== false);
     const documentLinks = items.map((document) => `
       <li>
         <a class="side-document${document.path === currentPath ? ' is-active' : ''}"
-           href="/docs/${encodePath(document.path)}">
+           href="${document.path === HISTORY_MARKDOWN_PATH ? '/history' : `/docs/${encodePath(document.path)}`}">
           ${escapeHtml(document.title)}
         </a>
       </li>
@@ -160,6 +170,17 @@ export function roadmapPage({ appName, documents, timeline }) {
   });
 }
 
+export function historyPage({ appName, documents, story }) {
+  return shell({
+    appName,
+    content: story,
+    currentPath: HISTORY_MARKDOWN_PATH,
+    documents,
+    mainClass: 'main-content--history',
+    title: 'História ROLUMI',
+  });
+}
+
 export function documentPage({ appName, currentPath, documents, html, title }) {
   const section = sections.find((item) => currentPath.startsWith(`${item.folder}/`));
   const content = `
@@ -180,7 +201,7 @@ export function sectionPage({ appName, documents, section }) {
   const sectionDocuments = documents.filter((document) => document.section === section.folder);
   const cards = sectionDocuments.length > 0
     ? sectionDocuments.map((document, index) => `
-      <a class="document-tile" href="/docs/${encodePath(document.path)}">
+      <a class="document-tile" href="${document.path === HISTORY_MARKDOWN_PATH ? '/history' : `/docs/${encodePath(document.path)}`}">
         <span>${String(index + 1).padStart(2, '0')}</span>
         <h2>${escapeHtml(document.title)}</h2>
         <p>${escapeHtml(document.path)}</p>
@@ -222,7 +243,7 @@ export function searchPage({ appName, documents, query, results }) {
     </form>
     <section class="search-results">
       ${results.map((result) => `
-        <a href="/docs/${encodePath(result.path)}">
+        <a href="${result.path === HISTORY_MARKDOWN_PATH ? '/history' : `/docs/${encodePath(result.path)}`}">
           <span>${escapeHtml(result.path)}</span>
           <h2>${escapeHtml(result.title)}</h2>
           <p>${escapeHtml(result.excerpt)}</p>

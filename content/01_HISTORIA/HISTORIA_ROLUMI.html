@@ -1,0 +1,914 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="História rodinnej firmy ROLUMI od remeselných začiatkov a jednej palety zásob po partnera pre celú stavbu.">
+  <title>História ROLUMI</title>
+  <style>
+    @font-face {
+      font-family: "Inter";
+      src: url("../02_BRAND/Design%20System/fonts/InterVariable.woff2") format("woff2");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --ink: #1d1e1f;
+      --yellow: #f9b62b;
+      --white: #ffffff;
+      --paper: #f8f8f7;
+      --surface: #f1f2f2;
+      --line: #dfe1e2;
+      --muted: #606367;
+      --content: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Inter", Arial, Helvetica, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; }
+    a {
+      color: inherit;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.22em;
+    }
+    a:hover { text-decoration-thickness: 3px; }
+    a:focus-visible {
+      outline: 3px solid var(--yellow);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 100;
+      top: 12px;
+      left: 12px;
+      padding: 10px 14px;
+      background: var(--yellow);
+      color: var(--ink);
+      font-weight: 850;
+      transform: translateY(-180%);
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .wrap {
+      width: min(var(--content), calc(100% - 96px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      min-height: 112px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+      border-bottom: 1px solid rgba(255,255,255,.16);
+    }
+    .topbar img { width: 220px; height: auto; }
+    .topbar nav { display: flex; align-items: center; gap: 28px; }
+    .topbar a {
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 750;
+      text-decoration: none;
+    }
+    .topbar a:hover { color: var(--yellow); }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: var(--ink);
+      color: var(--white);
+    }
+    .hero::before,
+    .hero::after {
+      position: absolute;
+      right: -180px;
+      width: 780px;
+      height: 1px;
+      background: rgba(255,255,255,.11);
+      content: "";
+      transform: rotate(-34deg);
+      transform-origin: right center;
+    }
+    .hero::before { top: 36%; }
+    .hero::after { top: 58%; right: -40px; }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      min-height: 670px;
+      align-items: end;
+      padding: 92px 0 88px;
+      gap: 64px;
+      grid-template-columns: minmax(0, 1fr) 290px;
+    }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      width: 36px;
+      height: 5px;
+      background: var(--yellow);
+      content: "";
+    }
+    .eyebrow--inverse { color: #c7c9cb; }
+    h1, h2, h3 { margin-top: 0; letter-spacing: -.05em; }
+    h1 {
+      max-width: 13ch;
+      margin-bottom: 0;
+      font-size: clamp(52px, 7vw, 94px);
+      font-weight: 850;
+      line-height: .94;
+    }
+    h1 span { color: var(--yellow); }
+    .hero-lede {
+      max-width: 700px;
+      margin: 36px 0 0;
+      color: #dfe1e2;
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.55;
+    }
+    .hero-number {
+      padding-left: 44px;
+      border-left: 1px solid rgba(255,255,255,.22);
+    }
+    .hero-number strong {
+      display: block;
+      color: var(--yellow);
+      font-size: clamp(90px, 11vw, 152px);
+      font-weight: 850;
+      letter-spacing: -.09em;
+      line-height: .78;
+    }
+    .hero-number span {
+      display: block;
+      margin-top: 24px;
+      color: #c7c9cb;
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: .1em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    .section { padding: 104px 0; }
+    .section--white { background: var(--white); }
+    .section--dark { background: var(--ink); color: var(--white); }
+    .section--yellow { background: var(--yellow); }
+    .section-heading {
+      display: grid;
+      margin-bottom: 64px;
+      gap: 48px;
+      grid-template-columns: 4fr 7fr;
+    }
+    .section-heading h2 {
+      margin-bottom: 0;
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 850;
+      line-height: 1;
+    }
+    .section-heading p {
+      max-width: 720px;
+      margin: 0;
+      align-self: end;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.75;
+    }
+    .section--dark .section-heading p { color: #c7c9cb; }
+
+    .origin-grid {
+      display: grid;
+      gap: 64px;
+      grid-template-columns: 5fr 7fr;
+    }
+    .origin-intro {
+      margin: 0;
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 760;
+      letter-spacing: -.04em;
+      line-height: 1.15;
+    }
+    .origin-copy { max-width: 720px; }
+    .origin-copy p { margin: 0 0 22px; font-size: 17px; line-height: 1.75; }
+    .story-quote {
+      margin: 48px 0 0;
+      padding: 32px 0 32px 32px;
+      border-left: 7px solid var(--yellow);
+      font-size: clamp(22px, 2.6vw, 34px);
+      font-weight: 760;
+      letter-spacing: -.035em;
+      line-height: 1.25;
+    }
+
+    .photo {
+      margin: 0;
+    }
+    .photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 24px;
+    }
+    .photo figcaption {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .places {
+      display: grid;
+      gap: 88px;
+    }
+    .place-story {
+      padding-top: 88px;
+      border-top: 1px solid var(--line);
+    }
+    .place-story:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+    .place-split {
+      display: grid;
+      align-items: center;
+      gap: 64px;
+      grid-template-columns: 4fr 7fr;
+    }
+    .place-copy h3 {
+      margin-bottom: 20px;
+      font-size: clamp(30px, 3.6vw, 48px);
+      line-height: 1.04;
+    }
+    .place-copy p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.72;
+    }
+    .place-meta {
+      display: block;
+      margin-bottom: 22px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .place-meta::before {
+      display: inline-block;
+      width: 26px;
+      height: 4px;
+      margin: 0 10px 3px 0;
+      background: var(--yellow);
+      content: "";
+    }
+    .place-heading {
+      display: grid;
+      margin-bottom: 40px;
+      gap: 48px;
+      grid-template-columns: 4fr 7fr;
+    }
+    .place-heading h3 {
+      margin: 0;
+      font-size: clamp(30px, 3.6vw, 48px);
+      line-height: 1.04;
+    }
+    .place-heading p {
+      margin: 0;
+      align-self: end;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.72;
+    }
+    .photo-sequence {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .photo-sequence--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .photo-card { margin: 0; }
+    .photo-card img {
+      display: block;
+      width: 100%;
+      height: clamp(220px, 20vw, 330px);
+      border-radius: 24px;
+      object-fit: cover;
+    }
+    .photo-card figcaption {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .photo-card figcaption strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--ink);
+      font-style: normal;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 0;
+    }
+    .timeline::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 178px;
+      width: 2px;
+      background: var(--line);
+      content: "";
+    }
+    .moment {
+      position: relative;
+      display: grid;
+      min-height: 132px;
+      padding: 0 0 48px;
+      gap: 56px;
+      grid-template-columns: 150px 1fr;
+    }
+    .moment:last-child { min-height: auto; padding-bottom: 0; }
+    .moment::before {
+      position: absolute;
+      top: 3px;
+      left: 166px;
+      width: 20px;
+      height: 20px;
+      border: 4px solid var(--white);
+      border-radius: 50%;
+      background: var(--ink);
+      box-shadow: 0 0 0 2px var(--ink);
+      content: "";
+    }
+    .moment--key::before { background: var(--yellow); box-shadow: 0 0 0 2px var(--yellow); }
+    .moment time {
+      font-size: 14px;
+      font-weight: 850;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+    .moment-content { padding-left: 40px; }
+    .moment h3 {
+      margin-bottom: 10px;
+      font-size: clamp(23px, 2.5vw, 32px);
+      line-height: 1.08;
+    }
+    .moment p { max-width: 780px; margin: 0; color: var(--muted); line-height: 1.65; }
+
+    .chapter-grid {
+      display: grid;
+      align-items: center;
+      gap: 72px;
+      grid-template-columns: 6fr 5fr;
+    }
+    .chapter-grid + .chapter-grid { margin-top: 96px; }
+    .chapter-grid--reverse { grid-template-columns: 5fr 6fr; }
+    .chapter-grid--reverse .chapter-copy { order: 2; }
+    .chapter-grid--reverse .photo { order: 1; }
+    .chapter-number {
+      display: block;
+      margin-bottom: 26px;
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    .chapter-copy h2 {
+      margin-bottom: 24px;
+      font-size: clamp(34px, 4vw, 54px);
+      line-height: 1.02;
+    }
+    .chapter-copy p { margin: 0 0 20px; color: #c7c9cb; font-size: 17px; line-height: 1.75; }
+
+    .name-story {
+      display: grid;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .name-part {
+      min-height: 270px;
+      padding: 36px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .name-part strong {
+      display: block;
+      margin-bottom: 48px;
+      font-size: clamp(64px, 8vw, 108px);
+      font-weight: 850;
+      letter-spacing: -.08em;
+      line-height: .8;
+    }
+    .name-part span { display: block; font-size: 18px; font-weight: 700; }
+    .name-note { max-width: 760px; margin: 32px 0 0; color: var(--muted); line-height: 1.65; }
+
+    .pillars {
+      display: grid;
+      border-top: 1px solid #444649;
+      border-left: 1px solid #444649;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .pillar {
+      min-height: 290px;
+      padding: 36px;
+      border-right: 1px solid #444649;
+      border-bottom: 1px solid #444649;
+    }
+    .pillar span {
+      display: block;
+      margin-bottom: 56px;
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .14em;
+    }
+    .pillar h3 { margin-bottom: 18px; font-size: 25px; line-height: 1.1; }
+    .pillar p { margin: 0; color: #c7c9cb; line-height: 1.65; }
+
+    .statement {
+      max-width: 1040px;
+      margin: 0;
+      font-size: clamp(40px, 6vw, 76px);
+      font-weight: 850;
+      letter-spacing: -.055em;
+      line-height: 1;
+    }
+    .statement-note { max-width: 700px; margin: 32px 0 0; font-size: 16px; line-height: 1.65; }
+
+    .copy-grid {
+      display: grid;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .copy-card {
+      padding: 40px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .copy-card h3 { margin-bottom: 20px; font-size: 24px; }
+    .copy-card p { margin: 0; color: var(--muted); line-height: 1.75; }
+
+    .accuracy {
+      display: grid;
+      gap: 56px;
+      grid-template-columns: 4fr 8fr;
+    }
+    .accuracy h2 { font-size: clamp(34px, 4vw, 50px); line-height: 1.05; }
+    .accuracy ul { margin: 0; padding-left: 20px; }
+    .accuracy li { margin-bottom: 14px; line-height: 1.65; }
+    .source-links { display: grid; margin-top: 36px; gap: 10px; }
+    .source-links a { color: var(--muted); font-size: 14px; }
+
+    footer {
+      padding: 40px 0;
+      background: var(--ink);
+      color: #c7c9cb;
+      font-size: 13px;
+    }
+    footer .wrap { display: flex; justify-content: space-between; gap: 24px; }
+
+    @media (max-width: 900px) {
+      .wrap { width: min(var(--content), calc(100% - 64px)); }
+      .hero-content { min-height: 620px; grid-template-columns: minmax(0, 1fr); }
+      .hero-number { display: flex; align-items: end; gap: 24px; padding-left: 0; border-left: 0; }
+      .hero-number strong { font-size: 88px; }
+      .hero-number span { margin: 0 0 4px; }
+      .section-heading,
+      .origin-grid,
+      .chapter-grid,
+      .chapter-grid--reverse,
+      .place-split,
+      .place-heading,
+      .accuracy { grid-template-columns: minmax(0, 1fr); }
+      .chapter-grid--reverse .chapter-copy,
+      .chapter-grid--reverse .photo { order: initial; }
+      .name-story,
+      .pillars { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { width: calc(100% - 40px); }
+      .topbar { min-height: 92px; gap: 20px; }
+      .topbar img { width: 180px; }
+      .topbar nav { display: none; }
+      .hero-content { min-height: 610px; padding: 68px 0 64px; }
+      h1 { max-width: 100%; font-size: clamp(36px, 10.2vw, 42px); }
+      .hero-lede { font-size: 17px; }
+      .hero-number strong { font-size: 78px; }
+      .section { padding: 72px 0; }
+      .section-heading { margin-bottom: 44px; gap: 20px; }
+      .section-heading p { font-size: 16px; }
+      .photo img { border-radius: 16px; }
+      .places { gap: 64px; }
+      .place-story { padding-top: 64px; }
+      .place-split,
+      .place-heading { gap: 28px; }
+      .photo-sequence,
+      .photo-sequence--two { grid-template-columns: 1fr; }
+      .photo-card img { border-radius: 16px; }
+      .timeline::before { left: 10px; }
+      .moment { gap: 0; grid-template-columns: 1fr; padding: 0 0 44px 42px; }
+      .moment::before { left: 0; }
+      .moment-content { padding: 10px 0 0; }
+      .name-story,
+      .pillars,
+      .copy-grid { grid-template-columns: 1fr; }
+      .name-part { min-height: 220px; }
+      .chapter-grid + .chapter-grid { margin-top: 72px; }
+      footer .wrap { display: block; }
+      footer p { margin: 8px 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+
+    @media print {
+      .topbar nav { display: none; }
+      .hero-content { min-height: auto; padding: 60px 0; }
+      .section { padding: 64px 0; }
+      .chapter-grid, .moment, .photo, .pillar, .copy-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#obsah">Preskočiť na obsah</a>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="topbar">
+        <img src="../02_BRAND/Rolumi_logo_white_yellowSymbol.svg" alt="ROLUMI STAVEBNINY">
+        <nav aria-label="Navigácia dokumentu">
+          <a href="../ROADMAP.html">Roadmap</a>
+          <a href="#casova-os">Časová os</a>
+          <a href="HISTORIA_ROLUMI.md">Markdown verzia</a>
+        </nav>
+      </div>
+      <div class="hero-content">
+        <div>
+          <p class="eyebrow eyebrow--inverse">História ROLUMI · Palárikovo</p>
+          <h1>Od jednej palety k partnerovi pre <span>celú stavbu.</span></h1>
+          <p class="hero-lede">Rodinný príbeh postupného rastu, remeselnej skúsenosti, obnovy zanedbaného miesta a zodpovednosti za výsledok.</p>
+        </div>
+        <div class="hero-number" aria-label="20 rokov od založenia">
+          <strong>20</strong>
+          <span>rokov<br>2006 až 2026</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="obsah">
+    <section class="section section--white">
+      <div class="wrap origin-grid">
+        <p class="origin-intro">ROLUMI nevzniklo ako hotový veľký projekt. Kapacitu, sortiment aj dôveru si budovalo krok po kroku.</p>
+        <div class="origin-copy">
+          <p>Remeselné korene rodiny Rošteckých siahajú podľa interných spomienok k strechám a tesárskej práci približne na začiatok nového tisícročia. Podnikateľský príbeh stavebnín sa začal skromne. Počas prvej zimnej sezóny sa celý sklad podľa rodinného záznamu zmestil na jedinú paletu.</p>
+          <p>Firma Ľubica Roštecká, Stavebniny ROLUMI, oficiálne vznikla <strong>7. júna 2006</strong>. Prvá predajňa fungovala na Štúrovej 81 v Palárikove v zázemí pri rodinnom dome. Rastúci záujem zákazníkov však čoskoro ukázal, že firma potrebuje väčší priestor.</p>
+          <blockquote class="story-quote">Začínali sme s tým, čo sa zmestilo na jednu paletu. Vyrástli sme vďaka práci, skúsenostiam a dôvere zákazníkov.</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--white" id="miesta">
+      <div class="wrap">
+        <div class="section-heading">
+          <h2>Miesta, ktoré niesli rast</h2>
+          <p>Fotografie ukazujú prechod od skromného zázemia pri dome cez obnovu bývalej školy a vlastný sklad až po dnešnú modernú budovu stavebnín.</p>
+        </div>
+
+        <div class="places">
+          <article class="place-story">
+            <div class="place-split">
+              <div class="place-copy">
+                <span class="place-meta">Štúrova 81 · 2006 až 2008</span>
+                <h3>Prvý sklad vedľa rodinného domu</h3>
+                <p>Začiatok nebol veľký, ale bol konkrétny. Predajňa využívala časť susedného pozemku a garáž pri rodinnom dome.</p>
+                <p>Tento záber otvára historickú galériu prvého webu a zachytáva prvý skladový dvor, z ktorého ROLUMI vyrástlo.</p>
+              </div>
+              <figure class="photo">
+                <img src="assets/2006-prvy-sklad-pri-dome.jpg" alt="Prvý skladový dvor ROLUMI pri rodinnom dome na Štúrovej 81" width="780" height="480" loading="lazy">
+                <figcaption>Prvý skladový dvor pri rodinnom dome. Zdroj: galéria prvého webu ROLUMI.</figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="place-story">
+            <span class="place-meta">Centrum Palárikova · 2008 až 2010</span>
+            <div class="place-heading">
+              <h3>Z cirkevnej školy vzniklo nové zázemie</h3>
+              <p>Zanedbaná budova dostala nové okná, fasádu a takmer kompletne obnovený interiér. Z bývalej školy vznikol Dom obchodu a služieb a dočasné zázemie ROLUMI. Firma objekt napokon neodkúpila a dnes ho naďalej využíva farský úrad.</p>
+            </div>
+            <div class="photo-sequence">
+              <figure class="photo-card">
+                <img src="assets/2008-cirkevna-skola-pred.jpg" alt="Bývalá cirkevná škola pred rekonštrukciou" width="780" height="480" loading="lazy">
+                <figcaption><strong>Pred obnovou</strong>Zanedbaná fasáda a pôvodné okná.</figcaption>
+              </figure>
+              <figure class="photo-card">
+                <img src="assets/2008-cirkevna-skola-rekonstrukcia.jpg" alt="Rekonštrukcia fasády bývalej cirkevnej školy" width="780" height="480" loading="lazy">
+                <figcaption><strong>Počas rekonštrukcie</strong>Obnova fasády prebiehala po častiach.</figcaption>
+              </figure>
+              <figure class="photo-card">
+                <img src="assets/2008-cirkevna-skola-po.jpg" alt="Obnovená budova bývalej cirkevnej školy v Palárikove" width="1800" height="1350" loading="lazy">
+                <figcaption><strong>Po obnove</strong>Dom obchodu a služieb a dočasné zázemie ROLUMI. Dnes objekt využíva farský úrad.</figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="place-story">
+            <span class="place-meta">Zadný dvor · od roku 2010</span>
+            <div class="place-heading">
+              <h3>Nový sklad dal rastu priestor</h3>
+              <p>Zadný pozemok sa upravil pre paletový materiál a v roku 2010 pribudol samostatný sklad. Spolu s predajňou vytvoril pevné prevádzkové zázemie stavebnín pre túto etapu rastu.</p>
+            </div>
+            <div class="photo-sequence photo-sequence--two">
+              <figure class="photo-card">
+                <img src="assets/2012-sklad.jpg" alt="Nový sklad ROLUMI s kostolnou vežou v pozadí" width="780" height="480" loading="lazy">
+                <figcaption><strong>Nový sklad</strong>Budova v zadnom dvore, pristavaná v roku 2010.</figcaption>
+              </figure>
+              <figure class="photo-card">
+                <img src="assets/2010-predajna.jpg" alt="Interiér predajne ROLUMI po obnove budovy" width="1037" height="778" loading="lazy">
+                <figcaption><strong>Nová predajňa</strong>Interiér ROLUMI po obnove budovy, približne 2010.</figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="place-story">
+            <div class="place-split">
+              <div class="place-copy">
+                <span class="place-meta">Remeselnícka 1 · približne 2020 až dnes</span>
+                <h3>Nová budova otvorila ďalšiu etapu</h3>
+                <p>Približne v roku 2020 ROLUMI dokončilo novú budovu stavebnín. Moderná predajňa vytvorila dôstojný priestor pre zákazníkov aj zázemie pre ďalší rozvoj firmy.</p>
+                <p>ROLUMI vlastní budovu spolu s priľahlým areálom, ktorý sa využíva ako skladové zázemie. V roku 2024 si jeho menšiu časť prenajala spoločnosť ROSIV, zameraná na prácu s masívnym drevom.</p>
+                <p>ROSIV vlastnia deti rodiny Rošteckých, ktoré tak pokračujú v rodinnej práci s drevom. Priestory slúžili maloobchodu do roku 2026. Tým sa uzatvára jedna etapa a začína sa transformácia ROLUMI.</p>
+              </div>
+              <figure class="photo">
+                <img src="assets/2020-nova-budova-rolumi.webp" alt="Najnovšia budova stavebnín ROLUMI na Remeselníckej 1" width="2500" height="1666" loading="lazy">
+                <figcaption>Najnovšia budova stavebnín, dokončená približne v roku 2020. Zdroj: aktuálny web ROLUMI.</figcaption>
+              </figure>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--white" id="casova-os">
+      <div class="wrap">
+        <div class="section-heading">
+          <h2>Časová os</h2>
+          <p>Presné míľniky oddeľujeme od približných rodinných spomienok. Vďaka tomu môže história slúžiť ako dôveryhodný základ ďalšej komunikácie.</p>
+        </div>
+        <div class="timeline">
+          <article class="moment">
+            <time>Okolo 2000</time>
+            <div class="moment-content">
+              <h3>Remeselné korene</h3>
+              <p>Prvé skúsenosti rodiny so strechami, tesárskou a pokrývačskou prácou. Obdobie je približné podľa interného brandového dotazníka.</p>
+            </div>
+          </article>
+          <article class="moment">
+            <time>Okolo 2005</time>
+            <div class="moment-content">
+              <h3>Jedna paleta zásob</h3>
+              <p>Rodinná spomienka zachytáva skromný začiatok, keď sa zásoba počas prvej zimy zmestila na jednu paletu.</p>
+            </div>
+          </article>
+          <article class="moment moment--key">
+            <time>7. jún 2006</time>
+            <div class="moment-content">
+              <h3>Oficiálny vznik stavebnín ROLUMI</h3>
+              <p>Firma Ľubica Roštecká, Stavebniny ROLUMI, začína pôsobiť v malej predajni na Štúrovej 81 v Palárikove.</p>
+            </div>
+          </article>
+          <article class="moment">
+            <time>2007</time>
+            <div class="moment-content">
+              <h3>Prvá zachovaná inzercia</h3>
+              <p>Archív dokladá aktívny predaj strešných materiálov a prvé kroky budovania lokálneho povedomia.</p>
+            </div>
+          </article>
+          <article class="moment moment--key">
+            <time>2008 až 2010</time>
+            <div class="moment-content">
+              <h3>Obnova bývalej cirkevnej školy</h3>
+              <p>Zanedbaná budova v centre Palárikova dostáva nové okná, fasádu a takmer kompletne obnovený interiér. Vzniká predajňa a Dom obchodu a služieb. ROLUMI objekt napokon neodkúpilo a dnes ho využíva farský úrad.</p>
+            </div>
+          </article>
+          <article class="moment">
+            <time>2010</time>
+            <div class="moment-content">
+              <h3>Nový sklad a prvý zachovaný web</h3>
+              <p>Väčšie zázemie umožňuje rozšíriť sortiment. Firma zároveň začína systematickejšie komunikovať v digitálnom priestore.</p>
+            </div>
+          </article>
+          <article class="moment">
+            <time>2012</time>
+            <div class="moment-content">
+              <h3>Obchod sa prepája s remeslom</h3>
+              <p>ROLUMI komunikuje stavebniny a strešné centrum. ROLUMI PLUS tesárstvo, pokrývačstvo, poradenstvo a dodanie materiálu.</p>
+            </div>
+          </article>
+          <article class="moment">
+            <time>2018 až 2020</time>
+            <div class="moment-content">
+              <h3>Spoločná identita</h3>
+              <p>Firma hľadá modernejší spôsob, ako pod jedným dôveryhodným menom spojiť obchodnú a realizačnú časť.</p>
+            </div>
+          </article>
+          <article class="moment moment--key">
+            <time>Okolo 2020</time>
+            <div class="moment-content">
+              <h3>Nová budova stavebnín</h3>
+              <p>ROLUMI dokončuje vlastnú modernú predajňu na Remeselníckej 1 spolu s priľahlým areálom využívaným ako skladové zázemie.</p>
+            </div>
+          </article>
+          <article class="moment">
+            <time>2023</time>
+            <div class="moment-content">
+              <h3>Komplexnejšia ponuka</h3>
+              <p>Zachovaný web už spája predajňu, stavebné práce, referencie, poradenstvo, cenovú kalkuláciu a dopravu.</p>
+            </div>
+          </article>
+          <article class="moment">
+            <time>2024</time>
+            <div class="moment-content">
+              <h3>Ďalšia generácia pokračuje s drevom</h3>
+              <p>Menšiu časť areálu si prenajíma spoločnosť ROSIV. Vlastnia ju deti rodiny Rošteckých a zameriava sa na prácu s masívnym drevom.</p>
+            </div>
+          </article>
+          <article class="moment moment--key">
+            <time>2026</time>
+            <div class="moment-content">
+              <h3>Koniec maloobchodnej etapy</h3>
+              <p>Priestory prestali slúžiť maloobchodu. Dvadsať rokov skúseností sa stáva základom transformácie a novej etapy ROLUMI.</p>
+            </div>
+          </article>
+          <article class="moment moment--key">
+            <time>2026 až 2030</time>
+            <div class="moment-content">
+              <h3>Transformácia ROLUMI 2030</h3>
+              <p>ROLUMI premieňa dve desaťročia skúseností na nový model fungovania. Transformácia prepája budúce využitie areálu, riadenie stavebných projektov, značku, nový web, marketing a obchod.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--dark">
+      <div class="wrap">
+        <div class="chapter-grid">
+          <div class="chapter-copy">
+            <span class="chapter-number">01 · Miesto</span>
+            <h2>Firma obnovila viac než predajňu.</h2>
+            <p>Presun do bývalej cirkevnej školy nebol iba zmenou adresy. ROLUMI prevzalo zanedbanú budovu, zrekonštruovalo ju a vrátilo jej funkciu. Objekt však napokon neodkúpilo a dnes ho využíva farský úrad.</p>
+            <p>Je to konkrétny dôkaz iniciatívy, vzťahu k Palárikovu a schopnosti meniť plán na skutočný výsledok.</p>
+          </div>
+          <figure class="photo">
+            <img src="assets/2008-cirkevna-skola-po.jpg" alt="Budova bývalej cirkevnej školy po rekonštrukcii" width="1800" height="1350" loading="lazy">
+            <figcaption>Bývalá cirkevná škola po rekonštrukcii na Dom obchodu a služieb a dočasné zázemie ROLUMI.</figcaption>
+          </figure>
+        </div>
+
+        <div class="chapter-grid chapter-grid--reverse">
+          <div class="chapter-copy">
+            <span class="chapter-number">02 · Značka</span>
+            <h2>Materiál a remeslo rástli spolu.</h2>
+            <p>Skúsenosť ROLUMI nevznikla iba za pultom. Firma pozná materiály aj ich použitie priamo na stavbe.</p>
+            <p>V roku 2019 sa už objavuje geometrická vizuálna identita a komunikácia „Všetko pre vašu stavbu“. Ide o historickú etapu, nie o dnešnú šablónu značky.</p>
+          </div>
+          <figure class="photo">
+            <img src="assets/2019-vizualna-identita.png" alt="Historický návrh vizuálnej komunikácie ROLUMI" width="2560" height="945" loading="lazy">
+            <figcaption>Jedna z etáp vývoja vizuálnej identity ROLUMI, 2019.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--white">
+      <div class="wrap">
+        <div class="section-heading">
+          <h2>Rodinné meno v značke</h2>
+          <p>Interný brandový dotazník vysvetľuje názov ROLUMI ako spojenie rodiny Rošteckých, Ľubice a Miloša.</p>
+        </div>
+        <div class="name-story" aria-label="Pôvod názvu ROLUMI">
+          <div class="name-part"><strong>RO</strong><span>Rošteckí</span></div>
+          <div class="name-part"><strong>LU</strong><span>Ľubica</span></div>
+          <div class="name-part"><strong>MI</strong><span>Miloš</span></div>
+        </div>
+        <p class="name-note">Rodinný pôvod nie je dekorácia. Je súčasťou kontinuity, osobnej zodpovednosti a spôsobu, akým firma budovala vzťahy so zákazníkmi.</p>
+      </div>
+    </section>
+
+    <section class="section section--dark">
+      <div class="wrap">
+        <div class="section-heading">
+          <h2>Na čom značka stojí</h2>
+          <p>História dáva ROLUMI konkrétne komunikačné dôkazy. Nemusí sa opierať o všeobecné superlatívy ani o nostalgiu bez súvisu s dneškom.</p>
+        </div>
+        <div class="pillars">
+          <article class="pillar"><span>01</span><h3>Postupný rast</h3><p>Od jednej palety cez prvú predajňu až po vlastnú budovu a skladový areál.</p></article>
+          <article class="pillar"><span>02</span><h3>Vzťah k miestu</h3><p>Obnova bývalej školy ukazuje iniciatívu a dlhodobé zakotvenie v Palárikove.</p></article>
+          <article class="pillar"><span>03</span><h3>Materiál aj realizácia</h3><p>Odbornosť stojí na skúsenosti s produktom aj jeho použitím na skutočnej stavbe.</p></article>
+          <article class="pillar"><span>04</span><h3>Rodinná kontinuita</h3><p>Od roku 2024 pokračuje ďalšia generácia v práci s masívnym drevom aj prostredníctvom spoločnosti ROSIV.</p></article>
+          <article class="pillar"><span>05</span><h3>Praktická pomoc</h3><p>Od rady a kalkulácie cez dodanie materiálu až po remeselnú realizáciu.</p></article>
+          <article class="pillar"><span>06</span><h3>Dôvera podložená časom</h3><p>Dvadsať rokov podnikateľskej kontinuity je fakt, nie reklamná fráza.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--yellow">
+      <div class="wrap">
+        <p class="eyebrow">Pracovná komunikačná téza</p>
+        <p class="statement">Rodinná firma, ktorá vyrástla z jednej palety na partnera pre celú stavbu.</p>
+        <p class="statement-note">Táto veta sumarizuje príbeh. Nie je historickým sloganom ani novým schváleným claimom značky.</p>
+      </div>
+    </section>
+
+    <section class="section section--white">
+      <div class="wrap">
+        <div class="section-heading">
+          <h2>Texty pripravené na použitie</h2>
+          <p>Formulácie možno ďalej prispôsobiť webu, prezentácii, sociálnej sieti alebo PR materiálu bez toho, aby sa menili základné historické fakty.</p>
+        </div>
+        <div class="copy-grid">
+          <article class="copy-card">
+            <h3>Krátky profil</h3>
+            <p>ROLUMI je rodinná firma z Palárikova s históriou od roku 2006. Z jednej palety zásob vyrástla až k vlastnej budove a skladovému areálu. Po uzavretí maloobchodnej etapy v roku 2026 vstupuje do ďalšej transformácie so skúsenosťami s materiálom, remeslom a realizáciou.</p>
+          </article>
+          <article class="copy-card">
+            <h3>Sociálne siete</h3>
+            <p>Začínali sme skromne. Počas prvej zimy sa naše zásoby zmestili na jednu paletu. Od 7. júna 2006 sme spolu so zákazníkmi, každou dodávkou a každou dokončenou stavbou rástli. Po dvadsiatich rokoch sa uzatvára maloobchodná etapa a otvára sa nová kapitola ROLUMI.</p>
+          </article>
+          <article class="copy-card">
+            <h3>O nás</h3>
+            <p>ROLUMI vzniklo 7. júna 2006 v malej predajni pri rodinnom dome. Po obnove bývalej cirkevnej školy a ďalšom rozvoji zázemia pribudla približne v roku 2020 vlastná budova s priľahlým skladovým areálom. Maloobchodná etapa sa uzatvorila v roku 2026 a vytvorila základ pre ďalšiu transformáciu firmy.</p>
+          </article>
+          <article class="copy-card">
+            <h3>Prísľub značky</h3>
+            <p>Rozumieme materiálu aj realizácii. Pomáhame zákazníkovi urobiť správne rozhodnutie a dotiahnuť stavbu do výsledku.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap accuracy">
+        <h2>Presnosť a zdroje</h2>
+        <div>
+          <ul>
+            <li><strong>7. jún 2006</strong> je presný dátum uvedený na pôvodnom firemnom webe.</li>
+            <li>Roky <strong>okolo 2000</strong> a <strong>okolo 2005</strong> sú približné rodinné spomienky z interného brandového dotazníka.</li>
+            <li>Fotografia prvého skladového dvora je priradená k Štúrovej 81 podľa poradia záberov a sprievodného textu v pôvodnej galérii „Krok po kroku“.</li>
+            <li>Budovu bývalej cirkevnej školy ROLUMI zrekonštruovalo a dočasne využívalo, ale napokon ju neodkúpilo. Dnes ju naďalej využíva farský úrad.</li>
+            <li>Vlastníctvo ROLUMI sa vzťahuje na novšiu budovu na Remeselníckej 1 a priľahlý areál využívaný ako skladové zázemie, nie na bývalú cirkevnú školu.</li>
+            <li>Dokončenie novej budovy stavebnín je zaradené približne do roku 2020 podľa potvrdenia zadávateľa. Fotografia pochádza z aktuálneho webu ROLUMI a nemusí zachytávať stavbu priamo v roku dokončenia.</li>
+            <li>Vstup spoločnosti ROSIV do časti areálu v roku 2024 a ukončenie maloobchodného využitia priestorov v roku 2026 potvrdil zadávateľ pri spracovaní histórie.</li>
+            <li>Rok pri fotografii vyjadruje jej zaradenie v archíve alebo obdobie použitia. Nemusí byť dátumom nasnímania originálu.</li>
+            <li>Vizuál z roku 2019 dokumentuje vývoj značky. Aktuálne výstupy sa riadia súčasným brand systémom ROLUMI.</li>
+          </ul>
+          <div class="source-links">
+            <a href="https://drive.google.com/file/d/1rS1QrNboNOL7WBHyylEv0UOILMEi12wB/view" target="_blank" rel="noreferrer noopener">Pôvodná stránka O firme, ofirme.php</a>
+            <a href="https://drive.google.com/drive/folders/1DsZu9sz0dyb01G1CJgxmqqcEHnznEuET" target="_blank" rel="noreferrer noopener">Fotogaléria „Krok po kroku“ z prvého webu</a>
+            <a href="https://drive.google.com/file/d/1WksQyVcZZ3oshRXxPSHHHi04A8Wp2GNQ/view" target="_blank" rel="noreferrer noopener">Interný brandový dotazník</a>
+            <a href="https://drive.google.com/file/d/1riao8RYKrXvkDX94wlJFXfG7FFWwd9kT/view" target="_blank" rel="noreferrer noopener">Vizuálna komunikácia z roku 2019</a>
+            <a href="https://drive.google.com/file/d/1dY3KPdvkdPAOaOO4XsnEHztRyiHF_-Tm/view" target="_blank" rel="noreferrer noopener">Zachovaný web ROLUMI z roku 2023</a>
+            <a href="https://www.rolumi.sk/" target="_blank" rel="noreferrer noopener">Aktuálny web ROLUMI</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>ROLUMI · História spoločnosti</p>
+      <p>Spracované 19. 10. 2026 · Kompletné podklady zostávajú v archíve ROLUMI</p>
+    </div>
+  </footer>
+</body>
+</html>
