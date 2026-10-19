@@ -5,6 +5,10 @@ import sanitizeHtml from 'sanitize-html';
 
 export const HISTORY_HTML_PATH = '01_HISTORIA/HISTORIA_ROLUMI.html';
 export const HISTORY_MARKDOWN_PATH = '01_HISTORIA/HISTORIA_ROLUMI.md';
+export const DESIGN_SYSTEM_HTML_PATH = '02_BRAND/Design System/index.html';
+export const DESIGN_SYSTEM_TOKENS_PATH = '02_BRAND/Design System/tokens.css';
+export const SOCIAL_NETWORKS_HTML_PATH = '02_BRAND/Design System/socials/index.html';
+export const SOCIAL_NETWORKS_MARKDOWN_PATH = '02_BRAND/Design System/socials.md';
 
 export const sections = [
   { folder: '01_HISTORIA', label: 'História', number: '01', summary: 'Príbeh, vývoj a dôležité míľniky spoločnosti.' },
@@ -16,11 +20,7 @@ export const sections = [
 ];
 
 const visibleDocumentsBySection = new Map([
-  ['02_BRAND', new Set([
-    '02_BRAND/BRAND_AUDIT.md',
-    '02_BRAND/Design System/README.md',
-    '02_BRAND/TODO.md',
-  ])],
+  ['02_BRAND', new Set()],
 ]);
 
 const hiddenSidebarDocuments = new Set([
@@ -109,6 +109,10 @@ function resolveLink(href, currentPath) {
   const decodedPath = decodeURIComponent(pathname);
   const resolved = path.posix.normalize(path.posix.join(path.posix.dirname(currentPath), decodedPath));
   if (resolved === HISTORY_HTML_PATH) return `/history${suffix}`;
+  if (resolved === DESIGN_SYSTEM_HTML_PATH) return `/brand/design-system${suffix}`;
+  if (resolved === SOCIAL_NETWORKS_HTML_PATH || resolved === SOCIAL_NETWORKS_MARKDOWN_PATH) return `/brand/social-networks${suffix}`;
+  if (resolved.startsWith('02_BRAND/Design System/') && resolved.endsWith('.md')) return `/brand/design-system${suffix}`;
+  if (resolved.startsWith('02_BRAND/') && resolved.endsWith('.md')) return `/brand/guidelines${suffix}`;
   const route = resolved.toLowerCase().endsWith('.md') ? '/docs/' : '/content/';
   return `${route}${encodePath(resolved)}${suffix}`;
 }
@@ -155,6 +159,91 @@ function scopedHistorySelector(selector) {
   if (trimmed.startsWith('html ')) return `.history-story${trimmed.slice(4)}`;
   if (trimmed.startsWith('body ')) return `.history-story${trimmed.slice(4)}`;
   return `.history-story ${trimmed}`;
+}
+
+function scopedCatalogSelector(selector, scope) {
+  const trimmed = selector.trim();
+  if (trimmed === ':root' || trimmed === 'html' || trimmed === 'body') return scope;
+  if (trimmed.startsWith(':root ')) return `${scope}${trimmed.slice(5)}`;
+  if (trimmed.startsWith('html ')) return `${scope}${trimmed.slice(4)}`;
+  if (trimmed.startsWith('body ')) return `${scope}${trimmed.slice(4)}`;
+  if (/^(?:html|body)(?=[.#[:])/u.test(trimmed)) return `${scope}${trimmed.replace(/^(?:html|body)/u, '')}`;
+  return `${scope} ${trimmed}`;
+}
+
+function scopeCatalogCss(source, scope, containerName) {
+  let cursor = 0;
+  let output = '';
+
+  while (cursor < source.length) {
+    const openingIndex = source.indexOf('{', cursor);
+    if (openingIndex < 0) break;
+    const prelude = source.slice(cursor, openingIndex).trim();
+    const closingIndex = matchingBrace(source, openingIndex);
+    const body = source.slice(openingIndex + 1, closingIndex);
+
+    if (/^@media\s*\(max-width:/u.test(prelude)) {
+      const condition = prelude.replace(/^@media/u, '').trim();
+      output += `@container ${containerName} ${condition}{${scopeCatalogCss(body, scope, containerName)}}`;
+    } else if (prelude.startsWith('@media') || prelude.startsWith('@supports')) {
+      output += `${prelude}{${scopeCatalogCss(body, scope, containerName)}}`;
+    } else if (prelude.startsWith('@')) {
+      output += `${prelude}{${body}}`;
+    } else {
+      const selectors = prelude.split(',').map((selector) => scopedCatalogSelector(selector, scope)).join(',');
+      output += `${selectors}{${body}}`;
+    }
+
+    cursor = closingIndex + 1;
+  }
+
+  return output;
+}
+
+function embeddedCatalog(source, currentPath, {
+  containerName,
+  remove,
+  scope,
+  selectBody,
+  transform = (value) => value,
+}) {
+  const rendered = transform(renderHtmlResources(source, currentPath).replaceAll('—', '-').replaceAll('–', '-'));
+  const styles = [...rendered.matchAll(/<style>([\s\S]*?)<\/style>/gu)].map((match) => match[1]).join('\n');
+  const body = selectBody(rendered);
+  if (!styles || !body) throw new Error('Brand catalog structure is missing');
+
+  const cleaned = remove.reduce((value, pattern) => value.replace(pattern, ''), body);
+  return `<style>${scopeCatalogCss(styles, scope, containerName)}</style>${cleaned}`;
+}
+
+export function renderDesignSystemCatalog(source, tokens) {
+  const tokenStyles = renderHtmlResources(`<style>${tokens}</style>`, DESIGN_SYSTEM_TOKENS_PATH);
+  const combined = source.replace(/<link\s+rel="stylesheet"\s+href="tokens\.css">/u, tokenStyles);
+  return embeddedCatalog(combined, DESIGN_SYSTEM_HTML_PATH, {
+    containerName: 'design-system-content',
+    remove: [
+      /\s*<header\s+class="hero">[\s\S]*?<\/header>/u,
+      /\s*<footer>[\s\S]*?<\/footer>/u,
+    ],
+    scope: '.design-system-catalog',
+    selectBody: (rendered) => rendered.match(/<body>([\s\S]*?)<\/body>/u)?.[1],
+  });
+}
+
+export function renderSocialNetworksCatalog(source) {
+  return embeddedCatalog(source, SOCIAL_NETWORKS_HTML_PATH, {
+    containerName: 'social-networks-content',
+    remove: [
+      /\s*<header\s+class="page-header">[\s\S]*?<\/header>/u,
+      /\s*<footer>[\s\S]*?<\/footer>/u,
+      /\s*<script>[\s\S]*?<\/script>/u,
+    ],
+    scope: '.social-networks-catalog',
+    selectBody: (rendered) => rendered.match(/<body>([\s\S]*?)<\/body>/u)?.[1],
+    transform: (rendered) => rendered
+      .replace('id="safeToggle"', 'data-social-safe-toggle')
+      .replaceAll('Design System', 'Design system'),
+  });
 }
 
 function scopeHistoryCss(source) {

@@ -26,7 +26,7 @@ Design systém je pripravený na bežnú digitálnu tvorbu. Etapa však zostáva
 - [ ] počas tvorby webu doplniť potrebné produkčné stavy komponentov a ikonografiu,
 - [ ] otestovať minimálnu veľkosť loga, tlačový workflow a rozšíriť fotobanku s evidenciou práv.
 
-Podrobnosti: [Audit značky a design systému](./02_BRAND/BRAND_AUDIT.md) · [Otvoriť celý Design System](./02_BRAND/Design%20System/index.html) · [Otvorené úlohy](./02_BRAND/TODO.md)
+Podrobnosti: [Brand guidelines](./02_BRAND/README.md) · [Design system](./02_BRAND/Design%20System/index.html) · [Social networks](./02_BRAND/Design%20System/socials/index.html)
 
 ## 3. Stratégia a positioning
 

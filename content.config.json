@@ -2,7 +2,14 @@
   "sourceRoot": "..",
   "maintainInBackstage": [
     "ROADMAP.md",
-    "ROADMAP.html"
+    "ROADMAP.html",
+    "02_BRAND/Rolumi_logo.png",
+    "02_BRAND/Rolumi_logo_black(Brand).png",
+    "02_BRAND/Rolumi_logo_black.png",
+    "02_BRAND/Rolumi_logo_white.png",
+    "02_BRAND/Rolumi_logo_white_blackSymbol.png",
+    "02_BRAND/Rolumi_logo_white_yellowSymbol.png",
+    "02_BRAND/Rolumi_logo_yellow.png"
   ],
   "include": [
     "01_HISTORIA",

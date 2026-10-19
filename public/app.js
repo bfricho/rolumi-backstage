@@ -21,3 +21,12 @@ document.addEventListener('keydown', (event) => {
 window.addEventListener('resize', () => {
   if (window.innerWidth > 820) setMenu(false);
 });
+
+const socialCatalog = document.querySelector('.social-networks-catalog');
+const socialSafeToggle = document.querySelector('[data-social-safe-toggle]');
+
+socialSafeToggle?.addEventListener('click', () => {
+  const active = socialCatalog?.classList.toggle('show-safe') ?? false;
+  socialSafeToggle.setAttribute('aria-pressed', String(active));
+  socialSafeToggle.textContent = active ? 'Skryť safe zones' : 'Ukázať safe zones';
+});

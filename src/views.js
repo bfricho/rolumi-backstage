@@ -1,5 +1,56 @@
 import { encodePath, HISTORY_MARKDOWN_PATH, sections } from './content.js';
 
+const brandNavigation = [
+  { path: 'brand/guidelines', href: '/brand/guidelines', label: 'Brand guidelines' },
+  { path: 'brand/design-system', href: '/brand/design-system', label: 'Design system' },
+  { path: 'brand/social-networks', href: '/brand/social-networks', label: 'Social networks' },
+];
+
+const brandLogos = [
+  {
+    background: 'light',
+    description: 'Predvolená verzia na biele a veľmi svetlé pozadie.',
+    filename: 'Rolumi_logo.svg',
+    title: 'Primárne farebné logo',
+  },
+  {
+    background: 'dark',
+    description: 'Predvolená verzia na grafitové a veľmi tmavé pozadie.',
+    filename: 'Rolumi_logo_white_yellowSymbol.svg',
+    title: 'Biele logo so žltým symbolom',
+  },
+  {
+    background: 'yellow',
+    description: 'Jednofarebná brandová verzia s najvyšším kontrastom na žltej.',
+    filename: 'Rolumi_logo_black(Brand).svg',
+    title: 'Grafitové logo',
+  },
+  {
+    background: 'yellow',
+    description: 'Alternatíva pre veľký formát na žltom pozadí.',
+    filename: 'Rolumi_logo_white_blackSymbol.svg',
+    title: 'Biele logo s grafitovým symbolom',
+  },
+  {
+    background: 'dark',
+    description: 'Jednofarebná verzia na tmavé plochy alebo pokojnú fotografiu.',
+    filename: 'Rolumi_logo_white.svg',
+    title: 'Biele logo',
+  },
+  {
+    background: 'dark',
+    description: 'Žltá jednofarebná verzia na tmavé pozadie.',
+    filename: 'Rolumi_logo_yellow.svg',
+    title: 'Žlté logo',
+  },
+  {
+    background: 'light',
+    description: 'Iba pre technickú čiernobielu tlač bez brandovej grafitovej.',
+    filename: 'Rolumi_logo_black.svg',
+    title: 'Technické čierne logo',
+  },
+];
+
 export function escapeHtml(value) {
   return String(value ?? '')
     .replaceAll('&', '&amp;')
@@ -17,6 +68,25 @@ function documentNavigation(documents, currentPath = '') {
           <a class="side-section-link${currentPath === HISTORY_MARKDOWN_PATH ? ' is-active' : ''}" href="/history">
             <span>${section.number}</span>História ROLUMI
           </a>
+        </li>
+      `;
+    }
+
+    if (section.folder === '02_BRAND') {
+      const links = brandNavigation.map((item) => `
+        <li>
+          <a class="side-document${item.path === currentPath ? ' is-active' : ''}" href="${item.href}">
+            ${item.label}
+          </a>
+        </li>
+      `).join('');
+
+      return `
+        <li class="side-section">
+          <a class="side-section-link${currentPath.startsWith('brand/') ? ' is-active' : ''}" href="/brand/guidelines">
+            <span>${section.number}</span>${escapeHtml(section.label)}
+          </a>
+          <ul>${links}</ul>
         </li>
       `;
     }
@@ -78,7 +148,7 @@ function shell({ appName, content, currentPath, documents, mainClass = '', title
       <div class="app-grid">
         <aside class="sidebar" id="sidebar" data-sidebar>
           <nav aria-label="Hlavná navigácia">
-            <a class="roadmap-link${currentPath === 'ROADMAP.md' ? ' is-active' : ''}" href="/roadmap">
+            <a class="roadmap-link roadmap-link--primary${currentPath === 'ROADMAP.md' ? ' is-active' : ''}" href="/roadmap">
               <span>00</span> Roadmap
             </a>
             <a class="roadmap-link" href="/search">
@@ -178,6 +248,156 @@ export function historyPage({ appName, documents, story }) {
     documents,
     mainClass: 'main-content--history',
     title: 'História ROLUMI',
+  });
+}
+
+function brandPageHeader({ accent, aside = '', description, eyebrow, id, title }) {
+  return `
+    <section class="brand-page-header" aria-labelledby="${escapeHtml(id)}">
+      <div class="brand-page-wrap brand-page-header-inner${aside ? ' brand-page-header-inner--with-aside' : ''}">
+        <div class="brand-page-header-copy">
+          <p class="eyebrow inverse">${escapeHtml(eyebrow)}</p>
+          <h1 id="${escapeHtml(id)}">${escapeHtml(title)}<br><span>${escapeHtml(accent)}</span></h1>
+          <p>${escapeHtml(description)}</p>
+        </div>
+        ${aside}
+      </div>
+    </section>
+  `;
+}
+
+export function brandGuidelinesPage({ appName, documents }) {
+  const logos = brandLogos.map((logo) => {
+    const encodedFilename = encodeURIComponent(logo.filename);
+    const pngFilename = logo.filename.replace(/\.svg$/u, '.png');
+    const encodedPngFilename = encodeURIComponent(pngFilename);
+    const source = `/content/02_BRAND/${encodedFilename}`;
+    const svgDownload = `/brand/download/${encodedFilename}`;
+    const pngDownload = `/brand/download/${encodedPngFilename}`;
+    return `
+      <article class="brand-logo-card">
+        <div class="brand-logo-preview brand-logo-preview--${logo.background}">
+          <img src="${source}" alt="${escapeHtml(logo.title)}">
+        </div>
+        <div class="brand-logo-copy">
+          <p class="brand-logo-type">SVG + transparentné PNG · 2400 px</p>
+          <h3>${escapeHtml(logo.title)}</h3>
+          <p>${escapeHtml(logo.description)}</p>
+          <div class="download-links">
+            <a class="download-link" href="${svgDownload}">Stiahnuť SVG <span aria-hidden="true">↓</span></a>
+            <a class="download-link download-link--png" href="${pngDownload}">Stiahnuť PNG <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  const manualLink = `
+    <a class="brand-manual-link" href="/brand/download/Rolumi_brandmanual_new.pdf">
+      <span>Pôvodný podklad</span>
+      <strong>Stiahnuť brand manuál</strong>
+      <b aria-hidden="true">↓</b>
+    </a>
+  `;
+  const content = `
+    ${brandPageHeader({
+      accent: 'Správne použitie.',
+      aside: manualLink,
+      description: 'Praktický základ pre prácu s logom, farbami a typografiou ROLUMI. Všetky logá na tejto stránke sú schválené zdrojové SVG súbory.',
+      eyebrow: 'Brand guidelines',
+      id: 'brand-guidelines-title',
+      title: 'Jedna značka.',
+    })}
+    <section class="brand-guideline-section">
+      <div class="brand-guidelines-wrap">
+        <div class="brand-guideline-heading">
+          <p class="eyebrow">01 / Základ</p>
+          <h2>Pevnosť, jasnosť a kontrast.</h2>
+          <p>ROLUMI stojí na grafitovej, žltej a bielej. Inter drží komunikáciu priamu a súčasnú. Žltá je funkčný signál, nie výplň každého prvku.</p>
+        </div>
+        <div class="brand-foundations-grid">
+          <article class="brand-color-card brand-color-card--ink"><strong>Grafitová</strong><code>#1D1E1F</code></article>
+          <article class="brand-color-card brand-color-card--yellow"><strong>Žltá</strong><code>#F9B62B</code></article>
+          <article class="brand-color-card brand-color-card--white"><strong>Biela</strong><code>#FFFFFF</code></article>
+          <article class="brand-type-card">
+            <span>Primárne písmo</span>
+            <strong>Inter</strong>
+            <p>ExtraBold 800 pre nadpisy.<br>Regular 400 pre bežný text.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="brand-guideline-section brand-guideline-section--logos">
+      <div class="brand-guidelines-wrap">
+        <div class="brand-guideline-heading">
+          <p class="eyebrow">02 / Logá na stiahnutie</p>
+          <h2>Variant vyberá pozadie.</h2>
+          <p>Logo neupravujte, neotáčajte, nenaťahujte ani neskladajte nanovo. Zachovajte okolo neho voľný priestor minimálne vo veľkosti samostatného symbolu.</p>
+        </div>
+        <div class="brand-logo-grid">${logos}</div>
+      </div>
+    </section>
+
+    <section class="brand-rules-panel">
+      <div class="brand-guidelines-wrap brand-rules-panel-inner">
+        <div>
+          <p class="eyebrow inverse">03 / Rýchla kontrola</p>
+          <h2>Pred použitím loga.</h2>
+        </div>
+        <ol>
+          <li><span>01</span>Vyberte variant podľa pozadia.</li>
+          <li><span>02</span>Zachovajte proporcie a ochrannú zónu.</li>
+          <li><span>03</span>Nepoužívajte tieň, obrys ani priehľadnosť.</li>
+          <li><span>04</span>Na fotografii použite biele logo iba na pokojnej tmavej ploche.</li>
+        </ol>
+      </div>
+    </section>
+  `;
+
+  return shell({
+    appName,
+    content,
+    currentPath: 'brand/guidelines',
+    documents,
+    mainClass: 'main-content--brand-guidelines',
+    title: 'Brand guidelines',
+  });
+}
+
+export function designSystemPage({ appName, catalog, documents }) {
+  const header = brandPageHeader({
+    accent: 'reálnu prácu.',
+    description: 'Kontrastná identita postavená na grafitovej, žltej, výraznej typografii a autentickom obraze stavebníctva.',
+    eyebrow: 'Design system',
+    id: 'design-system-title',
+    title: 'Pevná značka pre',
+  });
+  return shell({
+    appName,
+    content: `${header}<div class="design-system-catalog" aria-label="ROLUMI Design system">${catalog}</div>`,
+    currentPath: 'brand/design-system',
+    documents,
+    mainClass: 'main-content--brand-catalog',
+    title: 'Design system',
+  });
+}
+
+export function socialNetworksPage({ appName, catalog, documents }) {
+  const header = brandPageHeader({
+    accent: 'bez vizuálneho šumu.',
+    description: 'Jedna jasná myšlienka na formát. Fotografia, pevná typografia a žltá ako funkčný signál, bez oválnych prvkov.',
+    eyebrow: 'Social networks',
+    id: 'social-networks-title',
+    title: 'Social media',
+  });
+  return shell({
+    appName,
+    content: `${header}<div class="social-networks-catalog" aria-label="ROLUMI Social networks">${catalog}</div>`,
+    currentPath: 'brand/social-networks',
+    documents,
+    mainClass: 'main-content--brand-catalog',
+    title: 'Social networks',
   });
 }
 

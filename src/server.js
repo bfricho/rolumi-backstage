@@ -13,19 +13,27 @@ import {
 } from './auth.js';
 import { config } from './config.js';
 import {
+  DESIGN_SYSTEM_HTML_PATH,
+  DESIGN_SYSTEM_TOKENS_PATH,
   HISTORY_HTML_PATH,
   HISTORY_MARKDOWN_PATH,
   loadContentIndex,
   makeExcerpt,
+  renderDesignSystemCatalog,
   renderHistoryStory,
   renderMarkdown,
   renderRoadmapTimeline,
+  renderSocialNetworksCatalog,
   safeContentPath,
   sections,
+  SOCIAL_NETWORKS_HTML_PATH,
+  SOCIAL_NETWORKS_MARKDOWN_PATH,
 } from './content.js';
 import { createDatabase } from './database.js';
 import { verifyTurnstile } from './turnstile.js';
 import {
+  brandGuidelinesPage,
+  designSystemPage,
   documentPage,
   historyPage,
   loginPage,
@@ -33,11 +41,39 @@ import {
   roadmapPage,
   searchPage,
   sectionPage,
+  socialNetworksPage,
 } from './views.js';
 
 const app = express();
 const database = createDatabase(config.databaseUrl, config.databaseSsl);
 let contentIndex;
+
+const brandDownloads = new Set([
+  'Rolumi_brandmanual_new.pdf',
+  'Rolumi_logo.svg',
+  'Rolumi_logo.png',
+  'Rolumi_logo_black(Brand).svg',
+  'Rolumi_logo_black(Brand).png',
+  'Rolumi_logo_black.svg',
+  'Rolumi_logo_black.png',
+  'Rolumi_logo_white.svg',
+  'Rolumi_logo_white.png',
+  'Rolumi_logo_white_blackSymbol.svg',
+  'Rolumi_logo_white_blackSymbol.png',
+  'Rolumi_logo_white_yellowSymbol.svg',
+  'Rolumi_logo_white_yellowSymbol.png',
+  'Rolumi_logo_yellow.svg',
+  'Rolumi_logo_yellow.png',
+]);
+
+function brandRouteForPath(relativePath) {
+  if (relativePath === SOCIAL_NETWORKS_HTML_PATH || relativePath === SOCIAL_NETWORKS_MARKDOWN_PATH) return '/brand/social-networks';
+  if (relativePath === DESIGN_SYSTEM_HTML_PATH || (relativePath.startsWith('02_BRAND/Design System/') && relativePath.endsWith('.md'))) {
+    return '/brand/design-system';
+  }
+  if (relativePath.startsWith('02_BRAND/') && relativePath.endsWith('.md')) return '/brand/guidelines';
+  return '';
+}
 
 if (config.trustProxy) app.set('trust proxy', 1);
 app.disable('x-powered-by');
@@ -190,8 +226,55 @@ app.get('/history', async (request, response, next) => {
   }
 });
 
+app.get('/brand', (request, response) => response.redirect(303, '/brand/guidelines'));
+
+app.get('/brand/guidelines', (request, response) => {
+  response.send(brandGuidelinesPage({
+    appName: config.appName,
+    documents: contentIndex.documents,
+  }));
+});
+
+app.get('/brand/design-system', async (request, response, next) => {
+  try {
+    const [source, tokens] = await Promise.all([
+      fs.readFile(safeContentPath(config.contentRoot, DESIGN_SYSTEM_HTML_PATH), 'utf8'),
+      fs.readFile(safeContentPath(config.contentRoot, DESIGN_SYSTEM_TOKENS_PATH), 'utf8'),
+    ]);
+    response.send(designSystemPage({
+      appName: config.appName,
+      catalog: renderDesignSystemCatalog(source, tokens),
+      documents: contentIndex.documents,
+    }));
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.get('/brand/social-networks', async (request, response, next) => {
+  try {
+    const source = await fs.readFile(safeContentPath(config.contentRoot, SOCIAL_NETWORKS_HTML_PATH), 'utf8');
+    response.send(socialNetworksPage({
+      appName: config.appName,
+      catalog: renderSocialNetworksCatalog(source),
+      documents: contentIndex.documents,
+    }));
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.get(/^\/brand\/download\/(.+)$/, (request, response) => {
+  const filename = request.params[0];
+  if (!brandDownloads.has(filename)) {
+    return response.status(404).send(notFoundPage({ appName: config.appName, documents: contentIndex.documents }));
+  }
+  return response.download(safeContentPath(config.contentRoot, `02_BRAND/${filename}`), filename);
+});
+
 app.get('/sections/:folder', (request, response) => {
   if (request.params.folder === '01_HISTORIA') return response.redirect(303, '/history');
+  if (request.params.folder === '02_BRAND') return response.redirect(303, '/brand/guidelines');
   const section = sections.find((item) => item.folder === request.params.folder);
   if (!section) return response.status(404).send(notFoundPage({ appName: config.appName, documents: contentIndex.documents }));
   return response.send(sectionPage({ appName: config.appName, documents: contentIndex.documents, section }));
@@ -201,6 +284,8 @@ app.get(/^\/docs\/(.+)$/, async (request, response, next) => {
   try {
     const relativePath = decodeURIComponent(request.params[0]);
     if (relativePath === HISTORY_MARKDOWN_PATH) return response.redirect(303, '/history');
+    const brandRoute = brandRouteForPath(relativePath);
+    if (brandRoute) return response.redirect(303, brandRoute);
     if (!relativePath.toLowerCase().endsWith('.md') || !contentIndex.allFiles.has(relativePath)) {
       return response.status(404).send(notFoundPage({ appName: config.appName, documents: contentIndex.documents }));
     }
@@ -229,6 +314,8 @@ app.get(/^\/content\/(.+)$/, async (request, response, next) => {
     }
     if (relativePath === HISTORY_HTML_PATH) return response.redirect(303, '/history');
     if (relativePath === HISTORY_MARKDOWN_PATH) return response.redirect(303, '/history');
+    const brandRoute = brandRouteForPath(relativePath);
+    if (brandRoute) return response.redirect(303, brandRoute);
     if (relativePath.toLowerCase().endsWith('.md')) return response.redirect(303, `/docs/${request.params[0]}`);
     response.set('Content-Disposition', 'inline');
     return response.sendFile(safeContentPath(config.contentRoot, relativePath), { dotfiles: 'deny' });
