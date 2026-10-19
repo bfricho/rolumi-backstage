@@ -1,16 +1,19 @@
 # Sklad ROLUMI po zrušení maloobchodu
 
-**Téma:** Právne zaradenie skladu a oznamovací postup  
-**Spoločnosť:** ROLUMI s.r.o.  
-**IČO:** 50768441  
-**Adresa:** Remeselnícka 1, 941 11 Palárikovo  
-**Plánované zrušenie maloobchodnej prevádzkarne:** 1. 11. 2026  
-**Dátum spracovania:** 18. 10. 2026  
-**Verzia:** 2.1 – pracovný rozhodovací dokument
+**Téma:** Právne zaradenie skladu a oznamovací postup\
+**Spoločnosť:** ROLUMI s.r.o.\
+**IČO:** 50768441\
+**Adresa evidovaného súvisiaceho priestoru:** Remeselnícka 870/1, 941 11 Palárikovo\
+**Plánované zrušenie maloobchodnej prevádzkarne:** 1. 11. 2026\
+**Dátum spracovania:** 18. 10. 2026\
+**Posledná aktualizácia:** 19. 10. 2026\
+**Verzia:** 3.1, téma uzavretá
 
-> Dokument je pracovným podkladom. Nie je právnym, stavebným, požiarnym, bezpečnostným ani poistným stanoviskom. Konečný postup treba písomne potvrdiť s príslušným živnostenským úradom.
+> Evidenčné zaradenie priestoru bolo potvrdené úradným záznamom Okresného úradu Nové Zámky z 19. 10. 2026. Dokument naďalej nie je stavebným, požiarnym, bezpečnostným ani poistným stanoviskom.
 
 > Celkový spôsob fungovania spoločnosti rieši samostatný dokument [Operačný model ROLUMI](./03_OPERACNY_MODEL_ROLUMI.md).
+
+**Výsledok:** Súvisiaci priestor je v živnostenskom registri zapísaný ako aktívny. Téma je uzavretá a nevyžaduje ďalšie dokladovanie zrušenia predajne.
 
 ---
 
@@ -103,40 +106,39 @@ To však neznamená, že sklad netreba evidovať alebo oznámiť. Práve na skla
 
 ---
 
-## 4. Potrebuje ROLUMI sklad oznámiť?
+## 4. Výsledok oznámenia
 
 ### Krátka odpoveď
 
-**Pravdepodobne áno, ak už nie je na tejto adrese a v tomto režime evidovaný ako súvisiaci priestor.**
+**Áno. Oznámenie bolo vybavené a súvisiaci priestor bol zapísaný ako aktívny.**
 
-Najskôr treba zistiť:
+Okresný úrad Nové Zámky, odbor živnostenského podnikania, vydal 19. 10. 2026 úradný záznam č. OU-NZ-OZP-2026/030345-2. Na základe oznámenia z rovnakého dňa potvrdil v živnostenskom registri č. 440-36272 tieto údaje:
 
-1. čo je dnes pri ROLUMI na adrese Remeselnícka 1 evidované;
-2. či je evidovaná iba maloobchodná prevádzkareň alebo aj sklad/súvisiaci priestor;
-3. či úrad pri prechode z predajne na sklad očakáva dve samostatné oznámenia:
-   - zrušenie maloobchodnej prevádzkarne;
-   - zriadenie súvisiaceho priestoru – skladu;
-4. ku ktorým predmetom podnikania má byť sklad priradený.
+- podnikateľský subjekt: ROLUMI s.r.o., IČO 50 768 441;
+- predmet: kúpa tovaru na účely jeho predaja konečnému spotrebiteľovi alebo iným prevádzkovateľom živnosti;
+- adresa: Remeselnícka 870/1, 941 11 Palárikovo;
+- typ prevádzkarne: súvisiaci priestor;
+- stav: aktívny;
+- druh zmeny: doplnenie;
+- dátum zmeny: 19. 10. 2026.
 
-### Lehota
+Tým je potvrdené evidenčné zaradenie priestoru aj vybavenie oznámenia skladu. Zrušenie maloobchodnej prevádzkarne sa nebude samostatne dokladovať a nepovažuje sa za otvorenú úlohu.
+
+### Lehota, historický kontext
 
 Aktuálne znenie § 17 ods. 5 účinné od 17. 8. 2026 uvádza oznámenie do 15 dní od zriadenia prevádzkarne; cez § 17 ods. 7 sa tento režim vzťahuje aj na sklad podľa § 17 ods. 3 písm. a).
 
-Na portáli Slovensko.sk je zároveň dostupné staršie všeobecné tlačivo, ktoré uvádza oznámenie zriadenia najneskôr v deň zriadenia. Pre ROLUMI je preto bezpečnejšie nečakať na koniec zákonnej lehoty a postup potvrdiť alebo oznámenie podať ešte pred začatím skladového režimu.
+Na portáli Slovensko.sk je zároveň dostupné staršie všeobecné tlačivo, ktoré uvádza oznámenie zriadenia najneskôr v deň zriadenia. ROLUMI oznámenie podalo pred plánovaným začatím skladového režimu, preto rozdiel medzi týmito lehotami už nemá vplyv na vybavený krok.
 
 ---
 
-## 5. Odporúčaný postup pred 1. 11. 2026
+## 5. Nadväzujúci postup pred 1. 11. 2026
 
-### Krok 1 – overiť súčasnú evidenciu
+### Vybavené: evidencia a oznámenie
 
-Od príslušného živnostenského úradu získať písomnú informáciu, či má ROLUMI na adrese Remeselnícka 1 evidovaný:
+Oznámenie bolo podané 19. 10. 2026 a úrad v ten deň potvrdil doplnenie aktívneho súvisiaceho priestoru. Úradný záznam je založený medzi prílohami tohto dokumentu.
 
-- maloobchodnú prevádzkareň;
-- sklad alebo iný súvisiaci priestor;
-- prípadne viac prevádzkových jednotiek.
-
-### Krok 2 – pripraviť stručný opis budúceho skladu
+### Krok 1: dokončiť opis a fyzické vymedzenie skladu
 
 Opis má uviesť:
 
@@ -149,9 +151,9 @@ Opis má uviesť:
 - ojedinelý predaj iba s doručením zákazníkovi;
 - fyzické oddelenie od nájomcu a ostatných priestorov.
 
-### Krok 3 – priložiť jednoduchý pôdorys
+### Krok 2: založiť jednoduchý pôdorys
 
-Pred podaním nemusí existovať realizačný projekt regálov, ale musí byť zrejmé:
+Pre prevádzkový spis nemusí existovať realizačný projekt regálov, ale musí byť zrejmé:
 
 - ktorá časť areálu bude skladom ROLUMI;
 - približná výmera a vstup;
@@ -159,21 +161,15 @@ Pred podaním nemusí existovať realizačný projekt regálov, ale musí byť z
 - spoločné prístupové a manipulačné plochy;
 - predpokladané miesto regálov, paliet a pohybu VZV.
 
-### Krok 4 – vyžiadať si písomné potvrdenie postupu
+### Vybavené: zrušenie maloobchodnej prevádzkarne
 
-Úradu treba položiť konkrétne otázky uvedené v kapitole 7. Telefonická informácia môže pomôcť, ale rozhodujúci podklad pre firemnú evidenciu má byť písomný.
+Zrušenie predajne sa považuje za vybavené bez potreby zakladať samostatné potvrdenie alebo ďalší doklad.
 
-### Krok 5 – podať požadované oznámenie
+### Krok 3: overiť prevádzkovú pripravenosť
 
-Podľa odpovede úradu podať:
+Pred začatím reálneho používania skladu dokončiť kontrolu účelu užívania, požiarnej ochrany, BOZP, poistenia, regálov a prípadného používania VZV.
 
-- zrušenie maloobchodnej prevádzkarne;
-- zriadenie súvisiaceho priestoru – skladu;
-- alebo iný úradom určený typ zmeny.
-
-Uchovať podanie, prílohy, potvrdenie o doručení a odpoveď úradu.
-
-### Krok 6 – spustiť iba opísaný režim
+### Krok 4: spustiť iba opísaný režim
 
 Od 1. 11. 2026:
 
@@ -186,18 +182,19 @@ Od 1. 11. 2026:
 
 ---
 
-## 6. Dokumenty potrebné k rozhodnutiu a oznámeniu
+## 6. Dokumentácia
 
-### Nevyhnutné
+### Založené podklady
 
-- aktuálny výpis alebo písomná informácia o evidovaných priestoroch;
+- [Úradný záznam o doplnení súvisiaceho priestoru, 19. 10. 2026](./prilohy/02_SKLAD_ROLUMI_A_OZNAMENIE/2026-10-19_URADNY_ZAZNAM_SUVIASIACI_PRIESTOR_ROLUMI.heic).
+- [pracovná fotografia § 17 živnostenského zákona](./prilohy/02_SKLAD_ROLUMI_A_OZNAMENIE/2026-10-19_ZIVNOSTENSKY_ZAKON_PARAGRAF_17.heic).
+
+### Ešte založiť alebo doplniť
+
 - doklad o právnom vzťahu ROLUMI k priestoru;
 - jednoduchý pôdorys s hranicou skladu;
 - stručný opis činnosti a toku materiálu;
-- zoznam relevantných predmetov podnikania;
-- oznámenie o zrušení maloobchodnej prevádzkarne;
-- oznámenie zriadenia skladu, ak ho úrad vyžaduje;
-- potvrdenie o doručení a odpoveď úradu.
+- samotné podanie z 19. 10. 2026 alebo potvrdenie o jeho doručení, ak je k dispozícii.
 
 ### Súvisiace prevádzkové podklady
 
@@ -212,7 +209,9 @@ Tieto dokumenty nerozhodujú samy osebe o živnostenskom zaradení, ale musia by
 
 ---
 
-## 7. Návrh otázky pre živnostenský úrad
+## 7. Archivovaný návrh otázky pre živnostenský úrad
+
+Tento návrh bol pracovným podkladom pred vybavením oznámenia. Evidenčné zaradenie už bolo potvrdené úradným záznamom z 19. 10. 2026.
 
 > Spoločnosť ROLUMI s.r.o., IČO 50768441, plánuje k 1. 11. 2026 ukončiť maloobchodnú prevádzkareň na adrese Remeselnícka 1, 941 11 Palárikovo.
 >
@@ -253,20 +252,17 @@ Prílohou má byť jednoduchý pôdorys a stručný opis toku materiálu.
 | externý dodávateľ | bez samostatného prístupu; iba výnimočné protokolárne prevzatie s potvrdením ROLUMI PLUS |
 | Odhadovaná plocha | približne 100 m² |
 | Fyzické vybavenie | regály, niekoľko paliet, pravdepodobne VZV |
+| Evidenčné zaradenie | súvisiaci priestor |
+| Evidenčný stav | aktívny od 19. 10. 2026 |
+| Evidovaná adresa | Remeselnícka 870/1, 941 11 Palárikovo |
+| Predmet podnikania v zázname | kúpa tovaru na účely jeho predaja konečnému spotrebiteľovi alebo iným prevádzkovateľom živnosti |
 
 ---
 
 ## 9. Otvorené body
 
 - presná poloha, hranica a výmera skladu;
-- stav evidencie na živnostenskom úrade;
-- konkrétny formulár alebo elektronická služba;
-- predmety podnikania, ku ktorým má byť sklad priradený;
 - požadované označenie skladu;
-- presný dátum zriadenia súvisiaceho priestoru;
-- potvrdenie, či uloženie elektrického náradia ovplyvní zaradenie;
-- potvrdenie vplyvu odovzdávania materiálu a náradia spoločnosti ROLUMI PLUS;
-- potvrdenie vplyvu výnimočného priameho výdaja zodpovednej osobe externého dodávateľa;
 - stavebná, požiarna a poistná vhodnosť vybranej časti;
 - konečné rozhodnutie o VZV a jeho obsluhe.
 
@@ -276,15 +272,15 @@ Prílohou má byť jednoduchý pôdorys a stručný opis toku materiálu.
 
 | Kontrola | Stav |
 |---|---|
-| Overená dnešná evidencia priestorov ROLUMI | ☐ |
+| Overená evidencia súvisiaceho priestoru ROLUMI | ☑ 19. 10. 2026 |
 | Určená približná hranica skladu | ☐ |
 | Vyhotovený jednoduchý pôdorys | ☐ |
 | Pripravený opis budúcej činnosti | ☐ |
-| Otázka odoslaná živnostenskému úradu | ☐ |
-| Získaná písomná odpoveď alebo potvrdenie postupu | ☐ |
-| Podané zrušenie maloobchodnej prevádzkarne | ☐ |
-| Podané oznámenie skladu, ak je potrebné | ☐ |
-| Uchované potvrdenia o podaní | ☐ |
+| Oznámenie súvisiaceho priestoru podané živnostenskému úradu | ☑ 19. 10. 2026 |
+| Získané písomné potvrdenie zápisu | ☑ 19. 10. 2026 |
+| Zrušenie maloobchodnej prevádzkarne | ☑ Vybavené bez ďalšieho dokladovania |
+| Súvisiaci priestor zapísaný ako aktívny | ☑ 19. 10. 2026 |
+| Úradný záznam založený v téme | ☑ 19. 10. 2026 |
 | Overený účel užívania, PO, BOZP a poistenie | ☐ |
 | Sklad fyzicky oddelený od nájomcu | ☐ |
 | Odstránené označenia a otváracie hodiny predajne | ☐ |
@@ -294,9 +290,9 @@ Prílohou má byť jednoduchý pôdorys a stručný opis toku materiálu.
 
 ## 11. Záver
 
-ROLUMI môže podľa pracovného výkladu ukončiť maloobchodnú prevádzkareň a súčasne si ponechať vlastný sklad podporujúci stavebnú činnosť. Opísaný sklad má byť vedený ako priestor súvisiaci s prevádzkovaním živnosti, nie ako verejne prístupná predajňa.
+ROLUMI môže ukončiť maloobchodnú prevádzkareň a súčasne si ponechať vlastný sklad podporujúci stavebnú činnosť. Sklad bol v živnostenskom registri zapísaný ako aktívny súvisiaci priestor s dátumom zmeny 19. 10. 2026.
 
-Kritickým krokom nie je zachovanie maloobchodnej prevádzkarne, ale overenie súčasnej evidencie a správne oznámenie skladu. Keďže rovnaká adresa prechádza z režimu predajne do režimu interného skladu, ROLUMI má pred 1. 11. 2026 písomne potvrdiť s príslušným živnostenským úradom, aké oznámenia a prílohy požaduje.
+Téma skladu po zrušení maloobchodu je vybavená a uzavretá. Ďalšie prevádzkové kontroly nemenia tento stav a patria do bežnej prípravy a prevádzky skladu.
 
 ---
 
@@ -307,3 +303,13 @@ Kritickým krokom nie je zachovanie maloobchodnej prevádzkarne, ale overenie s�
 - [Elektronický formulár na oznámenie zmien – Slovensko.sk](https://www.slovensko.sk/static/eForm/dataset/JKM_ZRZMENA/1.2/Content/form.44.html)
 
 **Poznámka:** Právne predpisy, elektronické služby a formuláre sa môžu meniť. Pred podaním treba použiť aktuálnu službu alebo tlačivo určené príslušným živnostenským úradom.
+
+---
+
+## 13. Záznam zmien
+
+| Dátum | Verzia | Zmena |
+|---|---|---|
+| 19. 10. 2026 | 3.1 | Zrušenie maloobchodnej prevádzkarne sa nebude samostatne dokladovať. Odstránené zo zostávajúcich úloh a celá téma označená ako uzavretá. |
+| 19. 10. 2026 | 3.0 | Založený úradný záznam o doplnení aktívneho súvisiaceho priestoru a fotografia príslušnej časti § 17. Aktualizované otvorené body a kontrolný zoznam. Oznamovacia časť označená ako vybavená. |
+| 18. 10. 2026 | 2.1 | Pracovný rozhodovací dokument pred potvrdením evidenčného postupu. |

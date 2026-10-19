@@ -669,6 +669,25 @@ a { -webkit-tap-highlight-color: transparent; }
   content: "  →";
 }
 
+.roadmap-timeline .documents .resolved-document {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  font-size: .88rem;
+  font-weight: 750;
+  text-align: left;
+}
+
+.roadmap-timeline .documents .resolved-document strong {
+  font-size: .66rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
 .roadmap-timeline .detail-link {
   display: inline-block;
   margin-top: 18px;

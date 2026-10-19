@@ -13,14 +13,14 @@ ROLUMI Backstage is a private, lightweight web application that makes the compan
 
 1. A branded login screen protects the whole application with one configured username and password.
 2. Cloudflare Turnstile protects the login against automated attempts in production.
-3. The existing approved visual roadmap is preserved as the home screen and its document links open inside Backstage. Do not redesign this roadmap unless explicitly requested.
+3. The approved visual roadmap is maintained directly in Backstage as the home screen and its active document links open inside Backstage. Do not redesign this roadmap unless explicitly requested.
 4. Markdown files are rendered as readable, responsive documents with working relative links.
 5. Non-Markdown supporting files remain available through authenticated routes.
 6. Search helps users find text across the published Markdown snapshot.
 
 ## Content model
 
-The source ROLUMI repository remains the authoring source. Before publication, `npm run content:sync` copies the configured roadmap and section folders into this project's `content/` directory. The deployed container therefore includes an immutable, reviewable snapshot and does not require filesystem mounts or access to the source repository.
+The source ROLUMI repository remains the authoring source for section documents and supporting files. The roadmap is maintained directly in Backstage. Before publication, `npm run content:sync` preserves the Backstage roadmap and refreshes the configured section folders in this project's `content/` directory. The deployed container therefore includes an immutable, reviewable snapshot and does not require filesystem mounts or access to the source repository.
 
 ## Scope boundaries
 

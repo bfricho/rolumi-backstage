@@ -11,7 +11,7 @@ export function escapeHtml(value) {
 
 function documentNavigation(documents, currentPath = '') {
   return sections.map((section) => {
-    const items = documents.filter((document) => document.section === section.folder);
+    const items = documents.filter((document) => document.section === section.folder && document.sidebar !== false);
     const documentLinks = items.map((document) => `
       <li>
         <a class="side-document${document.path === currentPath ? ' is-active' : ''}"

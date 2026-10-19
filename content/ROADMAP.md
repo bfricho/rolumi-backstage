@@ -29,7 +29,7 @@ Podrobnosti: [Audit značky a design systému](./02_BRAND/BRAND_AUDIT.md) · [Ot
 Pripraviť prvý návrh budúceho smerovania spoločnosti a jej pozície na trhu.
 
 - [ ] **Budúce využitie areálu Remeselnícka 1** – rozhodnúť o rozdelení plôch, zmluvnom modeli a postupnom zavedení modelov prenájmu alebo skladových služieb podľa dokumentu [Strategická analýza budúceho využitia areálu](./03_STRATEGIA_A_POSITIONING/01_STRATEGICKA_ANALYZA_AREALU.md).
-- [ ] **Sklad ROLUMI po zrušení maloobchodu** – overiť evidenciu skladu, potvrdiť oznamovací postup a pripraviť prechod z maloobchodnej prevádzkarne na interný sklad podľa dokumentu [Sklad ROLUMI a oznámenie](./03_STRATEGIA_A_POSITIONING/02_SKLAD_ROLUMI_A_OZNAMENIE.md).
+- [x] **Sklad ROLUMI po zrušení maloobchodu.** Súvisiaci priestor bol 19. 10. 2026 zapísaný v živnostenskom registri ako aktívny. Evidenčné zaradenie a oznamovacia časť sú vyriešené.
 - [ ] **Operačný model skupiny ROLUMI** – uzavrieť model, v ktorom ROLUMI riadi projekt a obchodný vzťah, ROLUMI PLUS je vždy generálnym realizátorom stavebného výkonu a podľa potreby riadi priamo zazmluvnenú externú subdodávku; následne zaviesť pracovný tok od dopytu cez nákup, sklad a realizáciu až po odovzdanie a vyhodnotenie zákazky podľa dokumentu [Operačný model skupiny ROLUMI](./03_STRATEGIA_A_POSITIONING/03_OPERACNY_MODEL_ROLUMI.md).
 
 ## 4. Web

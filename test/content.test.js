@@ -57,3 +57,12 @@ test('Brand navigation exposes only the approved three entries', async () => {
   ]);
   assert.equal(index.allFiles.has('02_BRAND/DECISIONS.md'), true);
 });
+
+test('resolved warehouse topic stays available without appearing in the sidebar', async () => {
+  const index = await loadContentIndex(path.resolve('content'));
+  const warehousePath = '03_STRATEGIA_A_POSITIONING/02_SKLAD_ROLUMI_A_OZNAMENIE.md';
+  const warehouse = index.documents.find((document) => document.path === warehousePath);
+
+  assert.equal(index.allFiles.has(warehousePath), true);
+  assert.equal(warehouse?.sidebar, false);
+});

@@ -20,6 +20,10 @@ const visibleDocumentsBySection = new Map([
   ])],
 ]);
 
+const hiddenSidebarDocuments = new Set([
+  '03_STRATEGIA_A_POSITIONING/02_SKLAD_ROLUMI_A_OZNAMENIE.md',
+]);
+
 const allowedTags = [
   ...sanitizeHtml.defaults.allowedTags,
   'details', 'summary', 'figure', 'figcaption', 'mark', 's', 'input',
@@ -88,6 +92,7 @@ export async function loadContentIndex(root) {
     documents.push({
       path: relativePath,
       section,
+      sidebar: !hiddenSidebarDocuments.has(relativePath),
       title: titleFromMarkdown(source, path.basename(relativePath, '.md').replaceAll('_', ' ')),
     });
   }

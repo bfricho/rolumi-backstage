@@ -199,6 +199,23 @@
       content: "  →";
       color: var(--yellow);
     }
+    .documents .resolved-document {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border: 2px solid var(--ink);
+      color: var(--ink);
+      font-size: 0.88rem;
+      font-weight: 750;
+      text-align: left;
+    }
+    .documents .resolved-document strong {
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
     .detail-link {
       display: inline-block;
       margin-top: 18px;
@@ -290,13 +307,13 @@
     <section class="step current">
       <div class="marker" aria-hidden="true">03</div>
       <div class="content">
-        <p class="status">Aktuálna agenda</p>
+        <p class="status">Aktuálna agenda · sklad vyriešený</p>
         <h2>Stratégia a positioning</h2>
-        <p class="description">Rozhodnúť o budúcom využití areálu, potvrdiť režim vlastného skladu a nastaviť model, v ktorom ROLUMI riadi projekt a ROLUMI PLUS ako generálny realizátor vždy zabezpečuje stavebný výkon alebo riadi externú subdodávku.</p>
-        <p class="outcome">Najbližší výsledok: oznámený interný sklad a jasný pracovný tok ROLUMI, ROLUMI PLUS aj priamo zazmluvnených externých dodávateľov od dopytu až po uzatvorenie stavebnej zákazky.</p>
+        <p class="description">Rozhodnúť o budúcom využití areálu a nastaviť model, v ktorom ROLUMI riadi projekt a ROLUMI PLUS ako generálny realizátor vždy zabezpečuje stavebný výkon alebo riadi externú subdodávku.</p>
+        <p class="outcome">Interný sklad je oznámený a evidovaný ako aktívny súvisiaci priestor. Najbližší výsledok: jasný pracovný tok ROLUMI, ROLUMI PLUS aj priamo zazmluvnených externých dodávateľov od dopytu až po uzatvorenie stavebnej zákazky.</p>
         <nav class="documents" aria-label="Strategické dokumenty">
           <a href="03_STRATEGIA_A_POSITIONING/01_STRATEGICKA_ANALYZA_AREALU.md">Budúce využitie areálu</a>
-          <a href="03_STRATEGIA_A_POSITIONING/02_SKLAD_ROLUMI_A_OZNAMENIE.md">Sklad ROLUMI a oznámenie</a>
+          <span class="resolved-document">Sklad ROLUMI a oznámenie <strong>Vyriešené</strong></span>
           <a href="03_STRATEGIA_A_POSITIONING/03_OPERACNY_MODEL_ROLUMI.md">Operačný model skupiny ROLUMI</a>
         </nav>
       </div>
@@ -330,7 +347,7 @@
     </section>
   </main>
   <footer>
-    <p>ROLUMI · pracovná roadmapa transformácie · aktualizované 18. 10. 2026</p>
+    <p>ROLUMI · pracovná roadmapa transformácie · aktualizované 19. 10. 2026</p>
   </footer>
 </body>
 </html>

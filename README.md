@@ -1,6 +1,6 @@
 # ROLUMI Backstage
 
-Private roadmap and knowledge portal for ROLUMI. The application packages a snapshot of the existing roadmap, section documents and supporting files, then renders Markdown in a lightweight branded interface.
+Private roadmap and knowledge portal for ROLUMI. The application maintains its roadmap directly and packages a snapshot of the section documents and supporting files, then renders Markdown in a lightweight branded interface.
 
 ## Local start
 
@@ -23,7 +23,7 @@ From this directory, run:
 npm run content:sync
 ```
 
-The include/exclude rules live in `content.config.json`. The command replaces `content/` with a fresh snapshot from the parent ROLUMI directory. Run it before reviewing and publishing a content update. Working proposal exports are excluded until they become part of the approved knowledge base.
+The include/exclude rules live in `content.config.json`. The command replaces the synchronized section content with a fresh snapshot from the parent ROLUMI directory while preserving the Backstage-owned `content/ROADMAP.md` and `content/ROADMAP.html`. Run it before reviewing and publishing a content update. Working proposal exports are excluded until they become part of the approved knowledge base.
 
 ## Environment variables
 
