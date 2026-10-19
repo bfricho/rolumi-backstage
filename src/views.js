@@ -32,7 +32,7 @@ function documentNavigation(documents, currentPath = '') {
   }).join('');
 }
 
-function shell({ appName, content, currentPath, documents, title }) {
+function shell({ appName, content, currentPath, documents, mainClass = '', title }) {
   return `<!doctype html>
   <html lang="sk">
     <head>
@@ -79,7 +79,7 @@ function shell({ appName, content, currentPath, documents, title }) {
           <p class="sidebar-note">Interný pracovný priestor<br>Obsah podľa posledného publikovaného snapshotu</p>
         </aside>
         <div class="sidebar-scrim" data-menu-toggle aria-hidden="true"></div>
-        <main id="main" class="main-content">${content}</main>
+        <main id="main" class="main-content${mainClass ? ` ${mainClass}` : ''}">${content}</main>
       </div>
     </body>
   </html>`;
@@ -138,40 +138,19 @@ export function loginPage({ appName, error = '', siteKey = '', turnstileRequired
   </html>`;
 }
 
-function roadmapCards(documents) {
-  return sections.map((section) => {
-    const count = documents.filter((document) => document.section === section.folder).length;
-    const state = count > 0 ? `${count} ${count === 1 ? 'dokument' : count < 5 ? 'dokumenty' : 'dokumentov'}` : 'Pripravené na doplnenie';
-    return `
-      <a class="roadmap-card" href="/sections/${encodeURIComponent(section.folder)}">
-        <span class="roadmap-number">${section.number}</span>
-        <div>
-          <h2>${escapeHtml(section.label)}</h2>
-          <p>${escapeHtml(section.summary)}</p>
-          <span class="card-meta">${escapeHtml(state)} <b aria-hidden="true">→</b></span>
-        </div>
-      </a>
-    `;
-  }).join('');
-}
-
-export function roadmapPage({ appName, documents, html }) {
+export function roadmapPage({ appName, documents, timeline }) {
   const content = `
-    <section class="page-hero roadmap-hero">
-      <div>
-        <p class="eyebrow">00 / Prehľad</p>
-        <h1>Roadmap ROLUMI</h1>
-        <p class="hero-copy">Dohodnuté poradie budovania firemnej knowledge base a komunikácie transformácie spoločnosti.</p>
-      </div>
-      <div class="hero-mark" aria-hidden="true"><span>R</span></div>
-    </section>
-    <section class="roadmap-grid" aria-label="Časti roadmapy">${roadmapCards(documents)}</section>
-    <article class="markdown-card">
-      <div class="article-label">Zdrojový dokument</div>
-      <div class="markdown-body">${html}</div>
-    </article>
+    <h1 class="sr-only">Roadmapa ROLUMI</h1>
+    ${timeline}
   `;
-  return shell({ appName, content, currentPath: 'ROADMAP.md', documents, title: 'Roadmap' });
+  return shell({
+    appName,
+    content,
+    currentPath: 'ROADMAP.md',
+    documents,
+    mainClass: 'main-content--roadmap',
+    title: 'Roadmap',
+  });
 }
 
 export function documentPage({ appName, currentPath, documents, html, title }) {

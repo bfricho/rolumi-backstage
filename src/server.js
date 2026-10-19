@@ -16,7 +16,7 @@ import {
   loadContentIndex,
   makeExcerpt,
   renderMarkdown,
-  renderRoadmapHtml,
+  renderRoadmapTimeline,
   safeContentPath,
   sections,
 } from './content.js';
@@ -26,6 +26,7 @@ import {
   documentPage,
   loginPage,
   notFoundPage,
+  roadmapPage,
   searchPage,
   sectionPage,
 } from './views.js';
@@ -162,7 +163,11 @@ app.get('/', (request, response) => response.redirect(303, '/roadmap'));
 app.get('/roadmap', async (request, response, next) => {
   try {
     const source = await fs.readFile(safeContentPath(config.contentRoot, 'ROADMAP.html'), 'utf8');
-    response.send(renderRoadmapHtml(source));
+    response.send(roadmapPage({
+      appName: config.appName,
+      documents: contentIndex.documents,
+      timeline: renderRoadmapTimeline(source),
+    }));
   } catch (error) {
     next(error);
   }

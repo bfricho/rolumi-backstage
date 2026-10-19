@@ -1,7 +1,13 @@
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import test from 'node:test';
-import { loadContentIndex, renderMarkdown, renderRoadmapHtml, safeContentPath } from '../src/content.js';
+import {
+  loadContentIndex,
+  renderMarkdown,
+  renderRoadmapHtml,
+  renderRoadmapTimeline,
+  safeContentPath,
+} from '../src/content.js';
 
 test('markdown links stay inside the authenticated content routes', () => {
   const html = renderMarkdown(
@@ -23,6 +29,14 @@ test('the original roadmap HTML keeps its design and routes its assets and docum
   assert.match(html, /url\("\/content\/02_BRAND\/font\.woff2"\)/u);
   assert.match(html, /src="\/content\/02_BRAND\/logo\.svg"/u);
   assert.match(html, /href="\/docs\/03_STRATEGIA\/doc\.md"/u);
+});
+
+test('the roadmap timeline can be embedded in the Backstage shell without its standalone chrome', () => {
+  const source = '<header>Standalone</header><main id="roadmapa" class="timeline" aria-label="Roadmap"><a href="02_BRAND/BRAND_AUDIT.md">Brand</a></main><footer>Footer</footer>';
+  const html = renderRoadmapTimeline(source);
+  assert.match(html, /^<div class="roadmap-timeline"/u);
+  assert.match(html, /href="\/docs\/02_BRAND\/BRAND_AUDIT\.md"/u);
+  assert.doesNotMatch(html, /Standalone|Footer/u);
 });
 
 test('content paths reject traversal', () => {

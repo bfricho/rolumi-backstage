@@ -117,6 +117,14 @@ export function renderRoadmapHtml(source) {
   });
 }
 
+export function renderRoadmapTimeline(source) {
+  const rendered = renderRoadmapHtml(source);
+  const timeline = rendered.match(/<main\s+id="roadmapa"\s+class="timeline"\s+aria-label="([^"]+)">([\s\S]*?)<\/main>/u);
+  if (!timeline) throw new Error('Roadmap timeline is missing');
+
+  return `<div class="roadmap-timeline" role="region" aria-label="${timeline[1]}">${timeline[2]}</div>`;
+}
+
 export function renderMarkdown(source, currentPath) {
   const md = new MarkdownIt({ breaks: false, html: false, linkify: true, typographer: true });
   const slugs = new Map();
