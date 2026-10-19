@@ -15,6 +15,7 @@ Read [BRIEF.md](./BRIEF.md) after this file. It is the source of truth for what 
 - Do not read knowledge documents from paths outside `content/` at runtime.
 - Preserve the ROLUMI brand tokens in `public/styles.css`; use only approved full-logo variants from `public/`.
 - Preserve the source `ROADMAP.html` visual unchanged. Backstage may rewrite only relative asset and document URLs at response time.
+- Do not use en dashes or em dashes in user-facing Slovak copy. Prefer a full stop, comma or a rewritten sentence.
 - Keep Markdown raw HTML disabled and sanitized. Relative document links must stay behind authenticated `/docs/` or `/content/` routes.
 - Never commit `.env`, passwords, session secrets or the Turnstile secret.
 - Production requires `TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET` and an exact `TURNSTILE_HOSTNAMES` allowlist.

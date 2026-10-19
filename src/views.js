@@ -50,7 +50,7 @@ function shell({ appName, content, currentPath, documents, mainClass = '', title
           <span class="sr-only">Otvoriť navigáciu</span>
           <span></span><span></span><span></span>
         </button>
-        <a class="brand-lockup" href="/roadmap" aria-label="ROLUMI Backstage – roadmap">
+        <a class="brand-lockup" href="/roadmap" aria-label="ROLUMI Backstage: roadmap">
           <img src="/assets/rolumi-logo.svg" alt="ROLUMI STAVEBNINY">
           <span>Backstage</span>
         </a>
@@ -144,7 +144,7 @@ export function roadmapPage({ appName, documents, timeline }) {
       <div class="roadmap-manifesto-copy">
         <p class="roadmap-manifesto-kicker">ROLUMI 2030</p>
         <h1 id="roadmap-title">Staviame na 20 rokoch skúseností. <span>Spoločne tvoríme nové ROLUMI.</span></h1>
-        <p class="roadmap-manifesto-lede">Z tradičného maloobchodu sa meníme na strategického partnera pre celú stavbu — aby sme zákazníkom prinášali istotu od výberu materiálu až po úspešnú realizáciu.</p>
+        <p class="roadmap-manifesto-lede">Z tradičného maloobchodu sa meníme na strategického partnera pre celú stavbu. Zákazníkom tak prinášame istotu od výberu materiálu až po úspešnú realizáciu.</p>
       </div>
       <div class="roadmap-manifesto-year" aria-hidden="true"><span>20</span><span>30</span></div>
     </section>
